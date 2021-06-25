@@ -1,0 +1,17 @@
+.banner-div {
+  min-width: 33%;
+  max-width: 33%;
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+.banner-img {
+  margin-left: 20px;
+  margin-bottom: 50px;
+  width: 100%;
+  min-width: 240px;
+  max-width: 500px;
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
