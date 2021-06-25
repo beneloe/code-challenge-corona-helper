@@ -13,23 +13,23 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? %>
-        <li class="nav-item">
+        <li class="nav-item link-font">
           <%= link_to "Home", "#", class: "nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item link-font">
           <%= link_to "Messages", "#", class: "nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item link-font">
           <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link" %>
         </li>
       <% else %>
-        <li class="nav-item">
+        <li class="nav-item link-font">
           <%= link_to "COVID-19 & You", "#", class: "nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item link-font">
           <%= link_to "Search Helpers", "#", class: "nav-link" %>
         </li>
-        <li class="nav-item">
+        <li class="nav-item link-font">
           <%= link_to "Contacting Helpers", "#", class: "nav-link" %>
         </li>
       <% end %>

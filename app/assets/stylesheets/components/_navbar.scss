@@ -1,6 +1,8 @@
 .navbar-lewagon {
   justify-content: space-between;
   background: white;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  margin-bottom: 40px;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -23,4 +25,8 @@
   &:hover {
     color: #480E0E;
   }
+}
+
+.navbar-toggler {
+  border: 0px solid transparent !important;
 }

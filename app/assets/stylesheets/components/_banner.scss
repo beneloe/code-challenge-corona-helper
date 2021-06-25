@@ -6,7 +6,10 @@
   }
 }
 .banner-img {
+  margin-left: 20px;
+  margin-bottom: 50px;
   width: 100%;
+  min-width: 300px;
   max-width: 500px;
   @media (max-width: 768px) {
     display: none;
