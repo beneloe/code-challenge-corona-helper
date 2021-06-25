@@ -2,8 +2,8 @@
 
 puts "** Cleaning the database **"
 
-Message.delete_all
-Chatroom.delete_all
+# Message.delete_all
+# Chatroom.delete_all
 User.delete_all
 
 puts "** Creating admin **"
