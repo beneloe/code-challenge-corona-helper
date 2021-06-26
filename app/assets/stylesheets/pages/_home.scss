@@ -15,13 +15,23 @@ h5 {
   color: #C63D31;
 }
 
-.jumbotron {
-  padding: 32px 32px;
-  background-color: rgba(200, 60, 43, 0.15);
-  border-radius: 5px;
+.info-section {
+  @media (max-width: 768px) {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
 }
 
 .info-img {
+  align-self: flex-start;
+  max-width: 160px;
+  opacity: 0.8;
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.info-img-small {
   align-self: flex-start;
   max-width: 180px;
   opacity: 0.8;
