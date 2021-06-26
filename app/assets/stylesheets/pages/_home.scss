@@ -24,6 +24,7 @@ h5 {
 .info-img {
   align-self: flex-start;
   max-width: 180px;
+  opacity: 0.8;
   @media (max-width: 768px) {
     display: none;
   }
