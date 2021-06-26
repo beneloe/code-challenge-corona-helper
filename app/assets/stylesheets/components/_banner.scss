@@ -5,6 +5,7 @@
     display: none;
   }
 }
+
 .banner-img {
   margin-left: 20px;
   margin-bottom: 50px;
@@ -14,4 +15,9 @@
   @media (max-width: 768px) {
     display: none;
   }
+}
+
+.banner-bullet {
+  height: 30px;
+  margin: 0 10px 16px 35px;
 }
