@@ -1,10 +1,11 @@
-.banner-div {
+.banner-img-div {
   min-width: 33%;
   max-width: 33%;
   @media (max-width: 768px) {
     display: none;
   }
 }
+
 .banner-img {
   margin-left: 20px;
   margin-bottom: 50px;
@@ -13,5 +14,13 @@
   max-width: 500px;
   @media (max-width: 768px) {
     display: none;
+  }
+}
+
+.banner-bullet {
+  height: 30px;
+  margin: 0 10px 16px 30px;
+  @media (max-width: 991px) {
+    margin: 0 10px 16px 0;
   }
 }

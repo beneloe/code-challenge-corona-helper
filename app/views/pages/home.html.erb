@@ -1,20 +1,87 @@
 <div class="container">
-  <div class="d-flex align-items-center">
-    <div class="jumbotron">
+  <div class="d-flex align-items-center mb-4 mt-4">
+    <div class="jumbotron mt-5">
         <h1>Get your vaccine without parental approval.</h1>
         <p class="lead">Are your parents skeptical of COVID-19 and forbid you to get a vaccine? Don’t worry, you can get your vaccine without their consent by following these steps:</p>
-        <div class="d-flex">
-          <a href="#"><p>1. Finding out about your rights as an adolescent during COVID-19</p></a>
+        <div class="d-flex align-items-center">
+          <a href="#"><%= image_tag("bullet-1.png", class: "banner-bullet") %></a>
+          <a href="#"><p>Finding out about your rights as an adolescent during COVID-19</p></a>
         </div>
-        <div class="d-flex">
-          <a href="#"><p>2. Using our search function to find local physicians and counsellors</p></a>
+        <div class="d-flex align-items-center">
+          <a href="#"><%= image_tag("bullet-2.png", class: "banner-bullet") %></a>
+          <a href="#"><p>Using our search function to find local physicians and counsellors</p></a>
         </div>
-        <div class="d-flex">
-          <a href="#"><p>3. Reaching out to trustworthy helpers & further information</p></a>
+        <div class="d-flex align-items-center">
+          <a href="#"><%= image_tag("bullet-3.png", class: "banner-bullet") %></a>
+          <a href="#"><p>Reaching out to trustworthy helpers & further information</p></a>
         </div>
     </div>
-    <div class="banner-div">
+    <div class="banner-img-div mt-5">
       <%= image_tag("banner-img.png", class: "banner-img") %>
     </div>
   </div>
+
+  <div class="row">
+    <div>
+      <div class="d-flex">
+        <%= image_tag("mace.png", class: "col-md-3 mt-4 mr-4 info-img") %>
+        <div class="m-3 mt-4">
+          <h3 class="mb-4">1. COVID-19 and You</h3>
+          <h5 class="mb-3 mt-4">COVID-19 vaccines are available for 12 - 17 year-olds</h5>
+          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+          <h5 class="mb-3 mt-4">You have the right to medical care as an adolescent</h5>
+          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+          <h5 class="mb-3 mt-4">Physicians & youth counsellors are here to help</h5>
+          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div>
+      <div class="d-flex">
+        <div class="m-3 mt-4">
+          <h3 class="mb-4">2. Physicians & Counselling</h3>
+          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of.</p>
+        </div>
+        <%= image_tag("magnifier.png", class: "col-md-3 mt-4 ml-3 info-img") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div>
+      <div class="d-flex">
+        <%= image_tag("doctor.png", class: "col-md-3 mt-4 mr-4 info-img") %>
+        <div class="m-3 mt-4">
+          <h3 class="mb-4">3. Reach out to Helpers</h3>
+          <h5 class="mb-3 mt-4">Contact a youth counseller near you & set up a meeting</h5>
+          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+          <h5 class="mb-3 mt-4">Take a list of local physicians to the meeting with the youth counsellor</h5>
+          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+          <h5 class="mb-3 mt-4">What now?</h5>
+          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div>
+      <div class="d-flex">
+        <div class="m-3 mt-4">
+          <h3 class="mb-4">Further Information</h3>
+          <h5 class="mb-3 mt-4">Online youth counselling</h5>
+          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+          <h5 class="mb-3 mt-4">How to cope with social isolation during COVID-19</h5>
+          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+          <h5 class="mb-3 mt-4">Best practices during COVID-19 for youths</h5>
+          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+        </div>
+        <%= image_tag("info.png", class: "col-md-3 mt-4 ml-3 info-img") %>
+      </div>
+    </div>
+  </div>
+
 </div>

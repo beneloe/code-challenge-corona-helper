@@ -11,8 +11,21 @@ a {
   }
 }
 
+h5 {
+  color: #C63D31;
+}
+
 .jumbotron {
   padding: 32px 32px;
   background-color: rgba(200, 60, 43, 0.15);
   border-radius: 5px;
+}
+
+.info-img {
+  align-self: flex-start;
+  max-width: 180px;
+  opacity: 0.8;
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
