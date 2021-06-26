@@ -19,5 +19,8 @@
 
 .banner-bullet {
   height: 30px;
-  margin: 0 10px 16px 35px;
+  margin: 0 10px 16px 30px;
+  @media (max-width: 991px) {
+    margin: 0 10px 16px 0;
+  }
 }
