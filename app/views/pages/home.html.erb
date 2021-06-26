@@ -47,9 +47,11 @@
         </div>
         <%= image_tag("magnifier.png", class: "col-md-3 mt-4 ml-3 info-img") %>
       </div>
-      <%= @doc.search('.dl-search-result-presentation h3 a div').each do |element| %>
-        <%= puts "#{element.text.strip}" %>
-      <% end %>
+      <ul>
+        <% @entries_array.each do |physician| %>
+          <li><%= physician.name %> | <%= physician.specialty %> | <%= physician.address %></li>
+        <% end %>
+      </ul>
     </div>
   </div>
 
