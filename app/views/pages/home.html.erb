@@ -53,13 +53,29 @@
         </div>
         <%= image_tag("magnifier.png", class: "col-md-3 mt-4 ml-3 info-img") %>
       </div>
-      <% unless @entries_array.nil? %>
+      <% unless @physicians_array.nil? %>
         <% if params[:search].present? %>
           <div class="m-3">
-            <h5>Physicians near you</h5>
+            <h5>Physicians near <%= @address %></h5>
             <ul>
-              <% @entries_array.each do |physician| %>
-                <li><%= physician.name %> | <%= physician.specialty %> | <%= physician.address %></li>
+              <% @physicians_array[0...10].each do |physician| %>
+                <% unless physician.specialty == nil %>
+                  <li><%= physician.name %> | <%= physician.specialty %> | <%= physician.address %> | <%= physician.number %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      <% end %>
+      <% unless @counsellors_array.nil? %>
+        <% if params[:search].present? %>
+          <div class="m-3">
+            <h5>Counsellors near <%= @address %></h5>
+            <ul>
+              <% @counsellors_array[0...10].each do |counsellor| %>
+                <% unless counsellor.specialty == nil %>
+                  <li><%= counsellor.name %> | <%= counsellor.specialty %> | <%= counsellor.address %> | <%= counsellor.number %></li>
+                <% end %>
               <% end %>
             </ul>
           </div>
