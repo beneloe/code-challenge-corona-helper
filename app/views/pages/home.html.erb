@@ -43,12 +43,12 @@
       <div class="d-flex">
         <div class="m-3 mt-4 info-section">
           <h3 class="mb-4">2. Search Physicians & Counsellors</h3>
-          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of.</p>
+          <p class="mb-4">I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of.</p>
           <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline', autocomplete: "off" } do |f| %>
             <%= f.input :address,
               input_html: {value: "", class: "address-input"},
               placeholder: "Type your address" %>
-            <%= f.submit "Search", class: "btn btn-primary" %>
+            <%= f.submit "Search", class: "btn btn-primary align-self-start" %>
           <% end %>
         </div>
         <%= image_tag("magnifier.png", class: "col-md-3 mt-4 ml-3 info-img") %>
@@ -56,7 +56,7 @@
       <% unless @physicians_array.nil? %>
         <% if params[:search].present? %>
           <div class="m-3">
-            <h5>Physicians near <%= @address %></h5>
+            <h5 class="mb-3 mt-4">Physicians near <%= @address %></h5>
             <ul>
               <% @physicians_array[0...10].each do |physician| %>
                 <% unless physician.specialty == nil %>
@@ -70,7 +70,7 @@
       <% unless @counsellors_array.nil? %>
         <% if params[:search].present? %>
           <div class="m-3">
-            <h5>Counsellors near <%= @address %></h5>
+            <h5 class="mb-3 mt-4">Counsellors near <%= @address %></h5>
             <ul>
               <% @counsellors_array[0...10].each do |counsellor| %>
                 <% unless counsellor.specialty == nil %>
