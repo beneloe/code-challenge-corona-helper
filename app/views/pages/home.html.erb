@@ -44,28 +44,21 @@
         <div class="m-3 mt-4 info-section">
           <h3 class="mb-4">2. Search Physicians & Counsellors</h3>
           <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of.</p>
-          <%= form_tag root_path, class: "search-form" do %>
-            <%= text_field_tag :address,
-            params[:address],
-            class: "search-input-field first-input",
-            autocomplete: "off",
-            placeholder: "type your address" %>
-            <%= button_tag(type: "submit", class: "btn-search-form") do %>
-              <i class="fas fa-search"></i>
-            <% end %>
-          <% end %>
-          <%= form_tag("/") do %>
-            <%= label_tag(:address, "type your address") %>
-            <%= text_field_tag :address %>
-            <%= submit_tag %>
+          <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline', autocomplete: "off" } do |f| %>
+            <%= f.input :address,
+              input_html: {value: ""},
+              placeholder: "Type your address" %>
+            <%= f.submit "Search", class: "btn btn-primary" %>
           <% end %>
         </div>
         <%= image_tag("magnifier.png", class: "col-md-3 mt-4 ml-3 info-img") %>
       </div>
       <ul>
-        <% if params[:equipment].present? %>
-          <% @entries_array.each do |physician| %>
-            <li><%= physician.name %> | <%= physician.specialty %> | <%= physician.address %></li>
+        <% unless @entries_array.nil? %>
+          <% if params["search"].present? %>
+            <% @entries_array.each do |physician| %>
+              <li><%= physician.name %> | <%= physician.specialty %> | <%= physician.address %></li>
+            <% end %>
           <% end %>
         <% end %>
       </ul>

@@ -15,8 +15,11 @@ class PagesController < ApplicationController
   end
 
   def home
-    if params[:address].present?
-      html_content = URI.open('https://www.doctolib.de/kinderheilkunde-kinder-und-jugendmedizin/#{params[:address]}').read
+    @search = params["search"]
+    if @search.present? && @search != ""
+      @address = @search["address"]
+
+      html_content = URI.open("https://www.doctolib.de/kinderheilkunde-kinder-und-jugendmedizin/#{@address}").read
       doc = Nokogiri::HTML(html_content)
 
       entries = doc.css('.dl-search-result-presentation')
