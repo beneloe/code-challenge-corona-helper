@@ -1,20 +1,20 @@
 <div class="container">
   <div class="d-flex align-items-center mb-4 mt-4">
-    <div class="jumbotron mt-5">
-        <h1>Get your vaccine without parental approval.</h1>
-        <p class="lead">Are your parents skeptical of COVID-19 and forbid you to get a vaccine? Don’t worry, you can get your vaccine without their consent by following these steps:</p>
-        <div class="d-flex align-items-center">
-          <a href="#info-1"><%= image_tag("bullet-1.png", class: "banner-bullet") %></a>
-          <a href="#info-1"><p>Finding out about your rights as an adolescent during COVID-19</p></a>
-        </div>
-        <div class="d-flex align-items-center">
-          <a href="#info-2"><%= image_tag("bullet-2.png", class: "banner-bullet") %></a>
-          <a href="#info-2"><p>Using our search function to find local physicians and counsellors</p></a>
-        </div>
-        <div class="d-flex align-items-center">
-          <a href="#info-3"><%= image_tag("bullet-3.png", class: "banner-bullet") %></a>
-          <a href="#info-3"><p>Reaching out to trustworthy helpers & further information</p></a>
-        </div>
+    <div class="jumbotron mt-5 banner-card">
+      <h1>Get your vaccine without parental approval.</h1>
+      <p class="lead">Are your parents skeptical of COVID-19 and forbid you to get a vaccine? Don’t worry, you can get your vaccine without their consent by following these steps:</p>
+      <div class="d-flex align-items-center">
+        <a href="#info-1"><%= image_tag("bullet-1.png", class: "banner-bullet") %></a>
+        <a href="#info-1"><p>Finding out about your rights as an adolescent during COVID-19</p></a>
+      </div>
+      <div class="d-flex align-items-center">
+        <a href="#info-2"><%= image_tag("bullet-2.png", class: "banner-bullet") %></a>
+        <a href="#info-2"><p>Using our search function to find local physicians and counsellors</p></a>
+      </div>
+      <div class="d-flex align-items-center">
+        <a href="#info-3"><%= image_tag("bullet-3.png", class: "banner-bullet") %></a>
+        <a href="#info-3"><p>Reaching out to trustworthy helpers & further information</p></a>
+      </div>
     </div>
     <div class="banner-img-div mt-5">
       <%= image_tag("banner-img.png", class: "banner-img") %>
@@ -25,7 +25,7 @@
     <div>
       <div class="d-flex">
         <%= image_tag("mace.png", class: "col-md-3 mt-4 mr-4 info-img") %>
-        <div class="m-3 mt-4">
+        <div class="m-3 mt-4 info-section">
           <h3 class="mb-4">1. COVID-19 and You</h3>
           <h5 class="mb-3 mt-4">COVID-19 vaccines are available for 12 - 17 year-olds</h5>
           <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
@@ -41,20 +41,54 @@
   <div class="row mt-4" id="info-2">
     <div>
       <div class="d-flex">
-        <div class="m-3 mt-4">
-          <h3 class="mb-4">2. Physicians & Counselling</h3>
+        <div class="m-3 mt-4 info-section">
+          <h3 class="mb-4">2. Search Physicians & Counsellors</h3>
           <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of.</p>
+          <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline', autocomplete: "off" } do |f| %>
+            <%= f.input :address,
+              input_html: {value: "", class: "address-input"},
+              placeholder: "Type your address" %>
+            <%= f.submit "Search", class: "btn btn-primary" %>
+          <% end %>
         </div>
         <%= image_tag("magnifier.png", class: "col-md-3 mt-4 ml-3 info-img") %>
       </div>
+      <% unless @physicians_array.nil? %>
+        <% if params[:search].present? %>
+          <div class="m-3">
+            <h5>Physicians near <%= @address %></h5>
+            <ul>
+              <% @physicians_array[0...10].each do |physician| %>
+                <% unless physician.specialty == nil %>
+                  <li><%= physician.name %> | <%= physician.specialty %> | <%= physician.address %> | <%= physician.number %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      <% end %>
+      <% unless @counsellors_array.nil? %>
+        <% if params[:search].present? %>
+          <div class="m-3">
+            <h5>Counsellors near <%= @address %></h5>
+            <ul>
+              <% @counsellors_array[0...10].each do |counsellor| %>
+                <% unless counsellor.specialty == nil %>
+                  <li><%= counsellor.name %> | <%= counsellor.specialty %> | <%= counsellor.address %> | <%= counsellor.number %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   </div>
 
   <div class="row mt-4" id="info-3">
     <div>
       <div class="d-flex">
-        <%= image_tag("doctor.png", class: "col-md-3 mt-4 mr-4 info-img") %>
-        <div class="m-3 mt-4">
+        <%= image_tag("doctor.png", class: "col-md-3 mt-4 mr-1 info-img-small") %>
+        <div class="m-3 mt-4 info-section">
           <h3 class="mb-4" id="info-3">3. Reach out to Helpers</h3>
           <h5 class="mb-3 mt-4">Contact a youth counseller near you & set up a meeting</h5>
           <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
@@ -70,7 +104,7 @@
   <div class="row mt-4">
     <div>
       <div class="d-flex">
-        <div class="m-3 mt-4">
+        <div class="m-3 mt-4 info-section">
           <h3 class="mb-4">Further Information</h3>
           <h5 class="mb-3 mt-4">Online youth counselling</h5>
           <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
@@ -82,6 +116,5 @@
         <%= image_tag("info.png", class: "col-md-3 mt-4 ml-3 info-img") %>
       </div>
     </div>
-  </div>
-
+  </div>  
 </div>
