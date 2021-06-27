@@ -15,21 +15,27 @@ class PagesController < ApplicationController
   end
 
   def home
-    @search = params["search"]
-    if @search.present? && @search != ""
-      @address = @search["address"]
-
-      html_content = URI.open("https://www.doctolib.de/kinderheilkunde-kinder-und-jugendmedizin/#{@address}").read
-      doc = Nokogiri::HTML(html_content)
-
-      entries = doc.css('.dl-search-result-presentation')
-      @entries_array = []
-      entries.each do |entry|
-        name = entry.css('h3 a div').text
-        specialty = entry.css('.dl-search-result-subtitle').text
-        address = entry.css('.dl-text.dl-text-body.dl-text-s.dl-text-regular>div').text
-        @entries_array << Physician.new(name, specialty, address)
+    @search = search_params
+    if @search.present?
+      @address = @search["address"].downcase.split(",")[0]
+      unless @address.empty?
+        html_content = URI.open("https://www.doctolib.de/kinderheilkunde-kinder-und-jugendmedizin/#{@address}").read
+        doc = Nokogiri::HTML(html_content)
+        entries = doc.css('.dl-search-result-presentation')
+        @entries_array = []
+        entries.each do |entry|
+          name = entry.css('h3 a div').text
+          specialty = entry.css('.dl-search-result-subtitle').text
+          address = entry.css('.dl-text.dl-text-body.dl-text-s.dl-text-regular>div').text
+          @entries_array << Physician.new(name, specialty, address)
+        end
       end
     end
+  end
+
+  private
+
+  def search_params
+    params[:search]
   end
 end

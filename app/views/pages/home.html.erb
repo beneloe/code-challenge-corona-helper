@@ -46,22 +46,25 @@
           <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of.</p>
           <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline', autocomplete: "off" } do |f| %>
             <%= f.input :address,
-              input_html: {value: ""},
+              input_html: {value: "", class: "address-input"},
               placeholder: "Type your address" %>
             <%= f.submit "Search", class: "btn btn-primary" %>
           <% end %>
         </div>
         <%= image_tag("magnifier.png", class: "col-md-3 mt-4 ml-3 info-img") %>
       </div>
-      <ul>
-        <% unless @entries_array.nil? %>
-          <% if params["search"].present? %>
-            <% @entries_array.each do |physician| %>
-              <li><%= physician.name %> | <%= physician.specialty %> | <%= physician.address %></li>
-            <% end %>
-          <% end %>
+      <% unless @entries_array.nil? %>
+        <% if params[:search].present? %>
+          <div class="m-3">
+            <h5>Physicians near you</h5>
+            <ul>
+              <% @entries_array.each do |physician| %>
+                <li><%= physician.name %> | <%= physician.specialty %> | <%= physician.address %></li>
+              <% end %>
+            </ul>
+          </div>
         <% end %>
-      </ul>
+      <% end %>
     </div>
   </div>
 
