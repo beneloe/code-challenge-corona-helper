@@ -49,6 +49,7 @@ class PagesController < ApplicationController
     end
 
     if @search.present?
+      @address_real = @search["address"].split(",")[0]
       @address = @search["address"].split(",")[0].gsub(" ", "%20").gsub("ü", "ue").gsub("ä", "ae").gsub("ö", "oe")
       unless @address.empty?
         @url_counsellors = "https://www.gelbeseiten.de/Suche/Jugendaemter/#{@address}?umkreis=20000"
