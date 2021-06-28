@@ -38,7 +38,7 @@ class PagesController < ApplicationController
         physicians = doc_physicians.css('article.mod.mod-Treffer')
         @physicians_array = []
         physicians.each do |physician|
-          name = physician.css('a h2').text
+          name = physician.css('h2').text
           physician.css('p.d-inline-block.mod-Treffer--besteBranche').text.include?("Jugendmedizin") ? specialty = "Pediatrician" : nil
           address = physician.css('address.mod.mod-AdresseKompakt>p').first.text
           number = physician.css('p.mod-AdresseKompakt__phoneNumber').text
@@ -57,7 +57,7 @@ class PagesController < ApplicationController
         counsellors = doc_counsellors.css('article.mod.mod-Treffer')
         @counsellors_array = []
         counsellors.each do |counsellor|
-          name = counsellor.css('a h2').text
+          name = counsellor.css('h2').text
           counsellor.css('p.d-inline-block.mod-Treffer--besteBranche').text.include?("Jugend") ? specialty = "Youth Counsellor" : nil
           address = counsellor.css('address.mod.mod-AdresseKompakt>p').first.text
           number = counsellor.css('p.mod-AdresseKompakt__phoneNumber').text

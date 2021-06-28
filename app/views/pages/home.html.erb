@@ -63,7 +63,9 @@
                   <%= physician.name %> | <%= physician.specialty %> | <%= physician.address %> | <%= physician.number %>
                 <% end %>
               <% end %>
-              <%= link_to "#{@num_physicians} more physicians near #{@address}", "#{@url_physicians}", :target => "_blank" %>
+              <% unless @num_physicians.to_i < 5 %>
+                <%= link_to "#{@num_physicians.to_i - 5} more physicians near #{@address}", "#{@url_physicians}", :target => "_blank" %>
+              <% end %>
             </div>
           </div>
         <% end %>
@@ -78,7 +80,9 @@
                   <%= counsellor.name %> | <%= counsellor.specialty %> | <%= counsellor.address %> | <%= counsellor.number %>
                 <% end %>
               <% end %>
-              <%= link_to "#{@num_counsellors} more counsellors near #{@address}", "#{@url_counsellors}", :target => "_blank" %>
+              <% unless @num_counsellors.to_i < 5 %>
+                <%= link_to "#{@num_counsellors.to_i - 5} more counsellors near #{@address}", "#{@url_counsellors}", :target => "_blank" %>
+              <% end %>
             </div>
           </div>
         <% end %>
