@@ -2,7 +2,7 @@ import places from 'places.js';
 
 const initAutocomplete = () => {
   const reconfigurableOptions = {
-    language: 'en',
+    language: 'de',
     countries: ['de'],
     type: 'city',
   };

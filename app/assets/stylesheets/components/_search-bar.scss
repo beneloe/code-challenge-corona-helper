@@ -1,23 +1,59 @@
 .form-inline {
-  width: 70%;
-  @media (max-width: 991px) {
-    width: 100%;
-  }
+  width: 100%;
+  
   label {
     display: none;
   }
+
   .form-group {
     width: 80%;
+    @media (max-width: 991px) {
+      width: 75%;
+    }
   }
+
   .form-control {
     width: 100%;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: none;
+    &:focus {
+      box-shadow: none;
+      border: 1px solid #ced4da;
+      border-right: none;
+    }
   }
-  .btn {
+
+  .btn.btn-primary {
     width: 20%;
     background-color: #C63D31;
     border-color: #C63D31;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+
+    .active, &:active {
+      box-shadow: none;
+      outline: none;
+      background-color: red;
+      border-color: red;
+    }
+
+    .focus, &:focus {
+      box-shadow: none;
+      outline: none;
+    }
+
+    .active.focus, .active:focus,
+    :active.focus, :active:focus {
+      background-color: red;
+      border-color: red;
+      outline: none;
+      box-shadow: none;
+    }
+
+    @media (max-width: 991px) {
+      width: 25%;
+    }
   }
-  input:focus {
-   outline:none;
-  }
+  
 }
