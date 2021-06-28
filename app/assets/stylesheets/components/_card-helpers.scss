@@ -1,18 +1,39 @@
 .card-helpers {
+
   .card-helper {
-    border-bottom: black 1px solid;
+    position: relative;
+
+    div:after {
+      content: "";
+      background: black;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      width: 100%;
+    }
   }
 
-  .card-helpers-info {
-    width: 50%;
-  }
+  .card-helpers-name {
+    width: 100%;
+    justify-content: space-between;
+    @media (max-width: 768px) {
+      flex-wrap: wrap;
+      justify-content: flex-start;
+    }
 
-  .card-helpers-num {
-    width: 50%;
+    .card-helpers-name-p {
+      @media (max-width: 768px) {
+        width: 100%;
+      }
+    }
   }
 
   .card-helpers-icon {
     max-height: 30px;
+    @media (max-width: 768px) {
+      max-height: 20px;
+    }
   }
 
   .card-helpers-num-p {

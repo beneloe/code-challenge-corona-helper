@@ -50,53 +50,63 @@
               placeholder: "Search your town" %>
             <%= f.submit "Search", class: "btn btn-primary align-self-start" %>
           <% end %>
+          <% unless @physicians_array.nil? %>
+            <% if params[:search].present? %>
+              <div>
+                <h5 class="mb-3 mt-4">Physicians near <%= @address %></h5>
+                <div class="card-helpers">
+                  <% @physicians_array[0...5].each do |physician| %>
+                    <% unless physician.specialty == nil %>
+                      <div class="card-helper pt-3 pb-3">
+                        <div class="d-flex card-helpers-name">  
+                          <p class="card-helpers-name-p mb-0"><%= physician.name %></p>
+                          <div class="d-flex align-items-center mb-0">
+                            <%= image_tag("phone.png", class:"card-helpers-icon mr-1 mb-0") %>
+                            <p class="card-helpers-num-p mb-0"><%= physician.number %></p>
+                          </div>
+                        </div>
+                        <p class="mb-0"><%= physician.specialty %></p>
+                        <p><%= physician.address %></p>
+                      </div>
+                    <% end %>
+                  <% end %>
+                  <% unless @num_physicians.to_i < 5 %>
+                    <%= link_to "#{@num_physicians.to_i - 5} more physicians near #{@address}", "#{@url_physicians}", :target => "_blank" %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+          <% unless @counsellors_array.nil? %>
+            <% if params[:search].present? %>
+              <div>
+                <h5 class="mb-3 mt-4">Counsellors near <%= @address %></h5>
+                <div class="card-helpers">
+                  <% @counsellors_array[0...5].each do |counsellor| %>
+                    <% unless counsellor.specialty == nil %>
+                      <div class="card-helper pt-3 pb-3">
+                        <div class="d-flex card-helpers-name">  
+                          <p class="card-helpers-name-p mb-0"><%= counsellor.name %></p>
+                          <div class="d-flex align-items-center mb-0">
+                            <%= image_tag("phone.png", class:"card-helpers-icon mr-1 mb-0") %>
+                            <p class="card-helpers-num-p mb-0"><%= counsellor.number %></p>
+                          </div>
+                        </div>
+                        <p class="mb-0"><%= counsellor.specialty %></p>
+                        <p><%= counsellor.address %></p>
+                      </div>
+                    <% end %>
+                  <% end %>
+                  <% unless @num_counsellors.to_i < 5 %>
+                    <%= link_to "#{@num_counsellors.to_i - 5} more counsellors near #{@address}", "#{@url_counsellors}", :target => "_blank" %>
+                  <% end %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
         </div>
         <%= image_tag("magnifier.png", class: "col-md-3 mt-4 ml-3 info-img") %>
       </div>
-      <% unless @physicians_array.nil? %>
-        <% if params[:search].present? %>
-          <div class="m-3">
-            <h5 class="mb-3 mt-4">Physicians near <%= @address %></h5>
-            <div class="card-helpers">
-              <% @physicians_array[0...5].each do |physician| %>
-                <% unless physician.specialty == nil %>
-                  <div class="card-helper d-flex mt-3">
-                    <div class="card-helpers-info">
-                      <p><%= physician.name %></p>
-                      <p classe="mb-2"><%= physician.specialty %></p>
-                      <p><%= physician.address %></p>
-                    </div>
-                    <div class="card-helpers-num d-flex align-items-center">
-                      <%= image_tag("phone.png", class: "card-helpers-icon ml-5 mb-3 mr-1") %>
-                      <p class="card-helpers-num-p"><%= physician.number %></p>
-                    </div>
-                  </div>
-                <% end %>
-              <% end %>
-              <% unless @num_physicians.to_i < 5 %>
-                <%= link_to "#{@num_physicians.to_i - 5} more physicians near #{@address}", "#{@url_physicians}", :target => "_blank" %>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-      <% unless @counsellors_array.nil? %>
-        <% if params[:search].present? %>
-          <div class="m-3">
-            <h5 class="mb-3 mt-4">Counsellors near <%= @address %></h5>
-            <div class="card-helpers">
-              <% @counsellors_array[0...5].each do |counsellor| %>
-                <% unless counsellor.specialty == nil %>
-                  <%= counsellor.name %> | <%= counsellor.specialty %> | <%= counsellor.address %> | <%= counsellor.number %>
-                <% end %>
-              <% end %>
-              <% unless @num_counsellors.to_i < 5 %>
-                <%= link_to "#{@num_counsellors.to_i - 5} more counsellors near #{@address}", "#{@url_counsellors}", :target => "_blank" %>
-              <% end %>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
     </div>
   </div>
 
