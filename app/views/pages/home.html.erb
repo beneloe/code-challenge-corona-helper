@@ -47,7 +47,7 @@
           <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline', autocomplete: "off" } do |f| %>
             <%= f.input :address,
               input_html: {value: "", class: "address-input"},
-              placeholder: "Type your address" %>
+              placeholder: "Search your town" %>
             <%= f.submit "Search", class: "btn btn-primary align-self-start" %>
           <% end %>
         </div>
@@ -57,13 +57,14 @@
         <% if params[:search].present? %>
           <div class="m-3">
             <h5 class="mb-3 mt-4">Physicians near <%= @address %></h5>
-            <ul>
-              <% @physicians_array[0...10].each do |physician| %>
+            <div class="card-helpers">
+              <% @physicians_array[0...5].each do |physician| %>
                 <% unless physician.specialty == nil %>
-                  <li><%= physician.name %> | <%= physician.specialty %> | <%= physician.address %> | <%= physician.number %></li>
+                  <%= physician.name %> | <%= physician.specialty %> | <%= physician.address %> | <%= physician.number %>
                 <% end %>
               <% end %>
-            </ul>
+              <%= link_to "#{@num_physicians} more physicians near #{@address}", "#{@url_physicians}", :target => "_blank" %>
+            </div>
           </div>
         <% end %>
       <% end %>
@@ -71,13 +72,14 @@
         <% if params[:search].present? %>
           <div class="m-3">
             <h5 class="mb-3 mt-4">Counsellors near <%= @address %></h5>
-            <ul>
-              <% @counsellors_array[0...10].each do |counsellor| %>
+            <div class="card-helpers">
+              <% @counsellors_array[0...5].each do |counsellor| %>
                 <% unless counsellor.specialty == nil %>
-                  <li><%= counsellor.name %> | <%= counsellor.specialty %> | <%= counsellor.address %> | <%= counsellor.number %></li>
+                  <%= counsellor.name %> | <%= counsellor.specialty %> | <%= counsellor.address %> | <%= counsellor.number %>
                 <% end %>
               <% end %>
-            </ul>
+              <%= link_to "#{@num_counsellors} more counsellors near #{@address}", "#{@url_counsellors}", :target => "_blank" %>
+            </div>
           </div>
         <% end %>
       <% end %>

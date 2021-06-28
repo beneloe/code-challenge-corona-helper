@@ -31,8 +31,10 @@ class PagesController < ApplicationController
     if @search.present?
       @address = @search["address"].split(",")[0]
       unless @address.empty?
-        html_content_physicians = URI.open("https://www.gelbeseiten.de/Suche/kinderarzt/#{@address}?umkreis=20000").read
+        @url_physicians = "https://www.gelbeseiten.de/Suche/kinderarzt/#{@address}?umkreis=20000"
+        html_content_physicians = URI.open(@url_physicians).read
         doc_physicians = Nokogiri::HTML(html_content_physicians)
+        @num_physicians = doc_physicians.css('h1.mod.mod-TrefferlisteInfo').first.text.split.first
         physicians = doc_physicians.css('article.mod.mod-Treffer')
         @physicians_array = []
         physicians.each do |physician|
@@ -48,8 +50,10 @@ class PagesController < ApplicationController
     if @search.present?
       @address = @search["address"].split(",")[0]
       unless @address.empty?
-        html_content_counsellors = URI.open("https://www.gelbeseiten.de/Suche/Jugendaemter/#{@address}?umkreis=20000").read
+        @url_counsellors = "https://www.gelbeseiten.de/Suche/Jugendaemter/#{@address}?umkreis=20000"
+        html_content_counsellors = URI.open(@url_counsellors).read
         doc_counsellors = Nokogiri::HTML(html_content_counsellors)
+        @num_counsellors = doc_counsellors.css('h1.mod.mod-TrefferlisteInfo').first.text.split.first
         counsellors = doc_counsellors.css('article.mod.mod-Treffer')
         @counsellors_array = []
         counsellors.each do |counsellor|
