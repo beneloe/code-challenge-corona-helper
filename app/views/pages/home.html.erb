@@ -60,7 +60,17 @@
             <div class="card-helpers">
               <% @physicians_array[0...5].each do |physician| %>
                 <% unless physician.specialty == nil %>
-                  <%= physician.name %> | <%= physician.specialty %> | <%= physician.address %> | <%= physician.number %>
+                  <div class="card-helper d-flex mt-3">
+                    <div class="card-helpers-info">
+                      <p><%= physician.name %></p>
+                      <p classe="mb-2"><%= physician.specialty %></p>
+                      <p><%= physician.address %></p>
+                    </div>
+                    <div class="card-helpers-num d-flex align-items-center">
+                      <%= image_tag("phone.png", class: "card-helpers-icon ml-5 mb-3 mr-1") %>
+                      <p class="card-helpers-num-p"><%= physician.number %></p>
+                    </div>
+                  </div>
                 <% end %>
               <% end %>
               <% unless @num_physicians.to_i < 5 %>

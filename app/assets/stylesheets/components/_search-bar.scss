@@ -20,6 +20,8 @@
     width: 20%;
     background-color: #C63D31;
     border-color: #C63D31;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
     @media (max-width: 991px) {
       width: 25%;
     }
