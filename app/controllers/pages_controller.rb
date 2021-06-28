@@ -29,7 +29,8 @@ class PagesController < ApplicationController
   def home
     @search = search_params
     if @search.present?
-      @address = @search["address"].split(",")[0]
+      @address_real = @search["address"].split(",")[0]
+      @address = @search["address"].split(",")[0].gsub(" ", "%20").gsub("ü", "ue").gsub("ä", "ae").gsub("ö", "oe")
       unless @address.empty?
         @url_physicians = "https://www.gelbeseiten.de/Suche/kinderarzt/#{@address}?umkreis=20000"
         html_content_physicians = URI.open(@url_physicians).read
@@ -48,7 +49,7 @@ class PagesController < ApplicationController
     end
 
     if @search.present?
-      @address = @search["address"].split(",")[0]
+      @address = @search["address"].split(",")[0].gsub(" ", "%20").gsub("ü", "ue").gsub("ä", "ae").gsub("ö", "oe")
       unless @address.empty?
         @url_counsellors = "https://www.gelbeseiten.de/Suche/Jugendaemter/#{@address}?umkreis=20000"
         html_content_counsellors = URI.open(@url_counsellors).read

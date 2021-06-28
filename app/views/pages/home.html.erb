@@ -53,7 +53,7 @@
           <% unless @physicians_array.nil? %>
             <% if params[:search].present? %>
               <div>
-                <h5 class="mb-3 mt-4">Physicians near <%= @address %></h5>
+                <h5 class="mb-3 mt-4">Physicians near <%= @address_real %></h5>
                 <div class="card-helpers">
                   <% @physicians_array[0...5].each do |physician| %>
                     <% unless physician.specialty == nil %>
@@ -71,7 +71,7 @@
                     <% end %>
                   <% end %>
                   <% unless @num_physicians.to_i < 5 %>
-                    <%= link_to "#{@num_physicians.to_i - 5} more physicians near #{@address}", "#{@url_physicians}", :target => "_blank" %>
+                    <%= link_to "#{@num_physicians.to_i - 5} more physicians near #{@address_real}", "#{@url_physicians}", :target => "_blank" %>
                   <% end %>
                 </div>
               </div>
@@ -80,7 +80,7 @@
           <% unless @counsellors_array.nil? %>
             <% if params[:search].present? %>
               <div>
-                <h5 class="mb-3 mt-4">Counsellors near <%= @address %></h5>
+                <h5 class="mb-3 mt-4">Counsellors near <%= @address_real %></h5>
                 <div class="card-helpers">
                   <% @counsellors_array[0...5].each do |counsellor| %>
                     <% unless counsellor.specialty == nil %>
@@ -98,7 +98,7 @@
                     <% end %>
                   <% end %>
                   <% unless @num_counsellors.to_i < 5 %>
-                    <%= link_to "#{@num_counsellors.to_i - 5} more counsellors near #{@address}", "#{@url_counsellors}", :target => "_blank" %>
+                    <%= link_to "#{@num_counsellors.to_i - 5} more counsellors near #{@address_real}", "#{@url_counsellors}", :target => "_blank" %>
                   <% end %>
                 </div>
               </div>
