@@ -36,6 +36,7 @@ class PagesController < ApplicationController
           @url_physicians = "https://www.gelbeseiten.de/Suche/kinderarzt/#{@address}?umkreis=20000"
           html_content_physicians = URI.open(@url_physicians).read
           doc_physicians = Nokogiri::HTML(html_content_physicians)
+          @all_physicians = doc_physicians.css('head').text.include?("Bundesweit")
           @num_physicians = doc_physicians.css('h1.mod.mod-TrefferlisteInfo').first.text.split.first
           physicians = doc_physicians.css('article.mod.mod-Treffer')
           @physicians_array = []
