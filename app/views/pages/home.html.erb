@@ -70,7 +70,7 @@
                       </div>
                     <% end %>
                   <% end %>
-                  <% unless @num_physicians.to_i < 5 %>
+                  <% unless @num_physicians.to_i < 6 %>
                     <div class="mt-3">
                       <%= link_to "#{@num_physicians.to_i - 5} more physicians near #{@address_real}", "#{@url_physicians}", :target => "_blank" %>
                     </div>
@@ -99,7 +99,7 @@
                       </div>
                     <% end %>
                   <% end %>
-                  <% unless @num_counsellors.to_i < 5 %>
+                  <% unless @num_counsellors.to_i < 6 %>
                     <div class="mt-3">
                       <%= link_to "#{@num_counsellors.to_i - 5} more counsellors near #{@address_real}", "#{@url_counsellors}", :target => "_blank" %>
                     </div>
@@ -107,6 +107,10 @@
                 </div>
               </div>
             <% end %>
+          <% end %>
+          <% if @physicians_array.nil? && @counsellors_array.nil? %>
+            <h5 class="mb-3 mt-4">No results found...</h5>
+          <% elsif %>
           <% end %>
         </div>
         <%= image_tag("magnifier.png", class: "col-md-3 mt-4 ml-3 info-img") %>
