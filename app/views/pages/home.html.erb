@@ -118,7 +118,7 @@
               <% end %>
             <% end %>
           <% end %>
-          <% if @physicians_array.nil? && @counsellors_array.nil? || @all_physicians %>
+          <% if params[:search].present? && @physicians_array.nil? && @counsellors_array.nil? || @all_physicians %>
             <h5 class="mb-3 mt-4">No results found...</h5>
           <% end %>
         </div>
