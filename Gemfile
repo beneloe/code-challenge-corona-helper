@@ -29,6 +29,7 @@ gem 'redis', '~> 4.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'nokogiri'
 gem 'open-uri'
+gem 'json'
 gem 'devise'
 
 gem 'autoprefixer-rails', '10.2.5'
