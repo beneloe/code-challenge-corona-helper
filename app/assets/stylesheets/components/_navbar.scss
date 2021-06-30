@@ -12,6 +12,9 @@
 .navbar-lewagon .navbar-brand img {
   width: 210px;
   margin-left: 20px;
+  @media (max-width: 575px) {
+    margin-left: 0;
+  }
 }
 
 .navbar-nav .mr-auto {
