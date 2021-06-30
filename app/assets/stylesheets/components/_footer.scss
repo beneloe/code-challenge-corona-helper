@@ -30,3 +30,9 @@
 .footer-links a:hover {
   opacity: 1;
 }
+
+.footer-copyright {
+  @media (max-width: 575px) {
+    font-size: 0.8rem;
+  } 
+}
