@@ -28,6 +28,7 @@ class PagesController < ApplicationController
 
   def home
     begin
+      @physicians_array = []
       @search = search_params
       if @search.present?
         @address_real = @search["address"].split(",")[0]
@@ -39,17 +40,19 @@ class PagesController < ApplicationController
           @all_physicians = doc_physicians.css('head').text.include?("Bundesweit")
           @num_physicians = doc_physicians.css('h1.mod.mod-TrefferlisteInfo').first.text.split.first
           physicians = doc_physicians.css('article.mod.mod-Treffer')
-          @physicians_array = []
           physicians.each do |physician|
             name = physician.css('h2').text
             physician.css('p.d-inline-block.mod-Treffer--besteBranche').text.include?("Jugendmedizin") ? specialty = "Pediatrician" : nil
             address = physician.css('address.mod.mod-AdresseKompakt>p').first.text
             number = physician.css('p.mod-AdresseKompakt__phoneNumber').text
-            @physicians_array << Physician.new(name, specialty, address, number)
+            unless specialty.nil?
+              @physicians_array << Physician.new(name, specialty, address, number)
+            end
           end
         end
       end
 
+      @counsellors_array = []
       if @search.present?
         @address_real = @search["address"].split(",")[0]
         @address = @search["address"].split(",")[0].gsub(" ", "%20").gsub("ü", "ue").gsub("ä", "ae").gsub("ö", "oe")
@@ -59,18 +62,24 @@ class PagesController < ApplicationController
           doc_counsellors = Nokogiri::HTML(html_content_counsellors)
           @num_counsellors = doc_counsellors.css('h1.mod.mod-TrefferlisteInfo').first.text.split.first
           counsellors = doc_counsellors.css('article.mod.mod-Treffer')
-          @counsellors_array = []
           counsellors.each do |counsellor|
             name = counsellor.css('h2').text
             counsellor.css('p.d-inline-block.mod-Treffer--besteBranche').text.include?("Jugendämter") ? specialty = "Youth Counsellor" : nil
             address = counsellor.css('address.mod.mod-AdresseKompakt>p').first.text
             number = counsellor.css('p.mod-AdresseKompakt__phoneNumber').text
-            @counsellors_array << Counsellor.new(name, specialty, address, number)
+            unless specialty.nil?
+              @counsellors_array << Counsellor.new(name, specialty, address, number)
+            end
           end
         end
       end
     rescue StandardError => e
       puts "error"
+    end
+    respond_to do |format|
+      format.html
+      format.js
+      format.json
     end
   end
 
