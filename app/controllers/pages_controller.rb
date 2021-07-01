@@ -43,7 +43,7 @@ class PagesController < ApplicationController
           physicians.each do |physician|
             name = physician.css('h2').text
             physician.css('p.d-inline-block.mod-Treffer--besteBranche').text.include?("Jugendmedizin") ? specialty = "Pediatrician" : nil
-            address = physician.css('address.mod.mod-AdresseKompakt>p').first.text
+            address = physician.css('address.mod.mod-AdresseKompakt>p').first.text.tap { |s| s.slice!(physician.css('span.mod-AdresseKompakt__entfernung').text.to_s) }
             number = physician.css('p.mod-AdresseKompakt__phoneNumber').text
             unless specialty.nil?
               @physicians_array << Physician.new(name, specialty, address, number)
@@ -65,7 +65,7 @@ class PagesController < ApplicationController
           counsellors.each do |counsellor|
             name = counsellor.css('h2').text
             counsellor.css('p.d-inline-block.mod-Treffer--besteBranche').text.include?("Jugendämter") ? specialty = "Youth Counsellor" : nil
-            address = counsellor.css('address.mod.mod-AdresseKompakt>p').first.text
+            address = counsellor.css('address.mod.mod-AdresseKompakt>p').first.text.tap { |s| s.slice!(counsellor.css('span.mod-AdresseKompakt__entfernung').text.to_s) }
             number = counsellor.css('p.mod-AdresseKompakt__phoneNumber').text
             unless specialty.nil?
               @counsellors_array << Counsellor.new(name, specialty, address, number)
