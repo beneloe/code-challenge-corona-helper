@@ -10,5 +10,3 @@ const hideAlgolia = () => {
     document.getElementById('algolia-places-listbox-0').style.display = "block";
   }
 };
-
-hideAlgolia();
