@@ -2,6 +2,8 @@ require 'open-uri'
 require 'nokogiri'
 
 class CounsellorsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:create]
+
   def index
     if params[:address].present?
       @counsellors = Counsellor.all
@@ -13,8 +15,8 @@ class CounsellorsController < ApplicationController
   end
 
   def create
-
-    @search = @address_search
+    @counsellors_array = []
+    @search = params[:address]
     if @search.present?
       @address_real = @search["address"].split(",")[0]
       @address = @search["address"].split(",")[0].gsub(" ", "%20").gsub("ü", "ue").gsub("ä", "ae").gsub("ö", "oe")
@@ -30,8 +32,13 @@ class CounsellorsController < ApplicationController
           address = counsellor.css('address.mod.mod-AdresseKompakt>p').first.text.tap { |s| s.slice!(counsellor.css('span.mod-AdresseKompakt__entfernung').text.to_s) }
           number = counsellor.css('p.mod-AdresseKompakt__phoneNumber').text
           unless specialty.nil?
-            Counsellor.new(name, specialty, address, number)
+            @counsellors_array << Counsellor.new(name, specialty, address, number)
           end
+        end
+        if @counsellors_array.length > 0
+          render 'counsellor'
+        else
+          render 'counsellor'
         end
       end
     end
@@ -41,11 +48,5 @@ class CounsellorsController < ApplicationController
       format.js
       format.json
     end
-  end
-
-  private
-
-  def counsellor_params
-    params.require(:counsellor).permit(:name, :specialty, :address, :number)
   end
 end
