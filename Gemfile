@@ -31,6 +31,7 @@ gem 'nokogiri'
 gem 'open-uri'
 gem 'json'
 gem 'devise'
+gem 'geocoder'
 
 gem 'autoprefixer-rails', '10.2.5'
 gem 'font-awesome-sass'

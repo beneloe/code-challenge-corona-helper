@@ -1,3 +1,4 @@
 class Helper < ApplicationRecord
-  validates :name, :specialty, :address, :number, presence: true
+  geocoded_by :address
+  before_validation :geocode
 end
