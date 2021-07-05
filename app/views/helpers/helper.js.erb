@@ -1,13 +1,12 @@
-
 var results = document.querySelector("#results");
 results.innerHTML = "";
 results.insertAdjacentHTML("beforeend", `
-    <% if params[:search].present? && @physicians_array.first.nil? && @counsellors_array != nil && !@all_physicians %>
+    <% if params[:address].present? && @physicians_array.first.nil? && @counsellors_array != nil && !@all_physicians %>
       <h5 class="mb-3 mt-4">No results for physicians...</h5>
     <% end %>
     <% unless @all_physicians %>
       <% unless @physicians_array.first.nil? %>
-        <% if params[:search].present? %>
+        <% if params[:address].present? %>
           <div>
             <h5 class="mb-3 mt-4">Physicians near <%= @address_real %></h5>
             <div class="card-helpers">
@@ -36,13 +35,13 @@ results.insertAdjacentHTML("beforeend", `
         <% end %>
       <% end %>
     <% end %>
-
-    <% if params[:search].present? && @counsellors_array == nil && @physicians_array.first != nil && !@all_physicians %>
+    
+    <% if params[:address].present? && @counsellors_array == nil && @physicians_array.first != nil && !@all_physicians %>
       <h5 class="mb-3 mt-4">No results for counsellors...</h5>
     <% end %>
     <% unless @all_physicians %>
       <% unless @counsellors_array.nil? %>
-        <% if params[:search].present? %>
+        <% if params[:address].present? %>
           <div>
             <h5 class="mb-3 mt-4">Counsellors near <%= @address_real %></h5>
             <div class="card-helpers">
@@ -71,7 +70,7 @@ results.insertAdjacentHTML("beforeend", `
         <% end %>
       <% end %>
     <% end %>
-    <% if params[:search].present? && @physicians_array.first.nil? && @counsellors_array.nil? || @all_physicians %>
+    <% if params[:address].present? && @physicians_array.first.nil? && @counsellors_array.nil? || @all_physicians %>
       <h5 class="mb-3 mt-4">No results found...</h5>
     <% end %>
     `);
