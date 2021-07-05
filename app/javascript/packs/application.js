@@ -30,10 +30,12 @@ import "bootstrap";
 
 import { initAutocomplete } from '../plugins/init_autocomplete';
 import { hideAlgolia } from '../algolia';
+import { initMapbox } from '../plugins/init_mapbox';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
   // initSelect2();
   initAutocomplete();
   hideAlgolia();
+  initMapbox();
 });

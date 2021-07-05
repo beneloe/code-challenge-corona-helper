@@ -71,6 +71,6 @@ results.insertAdjacentHTML("beforeend", `
       <% end %>
     <% end %>
     <% if params[:address].present? && @physicians_array.first.nil? && @counsellors_array.nil? || @all_physicians %>
-      <h5 class="mb-3 mt-4">No results found...</h5>
+      <h5 class="mb-3 mt-4">No results found for #{@address_real}...</h5>
     <% end %>
     `);
