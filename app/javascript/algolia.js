@@ -1,5 +1,5 @@
 const hideAlgolia = () => {
-  var input = document.getElementById('search_address')
+  var input = document.getElementById('address_address')
   input.onblur = closeSuggest;
   input.onclick = openSuggest;
   input.onfocus = openSuggest;
@@ -10,3 +10,5 @@ const hideAlgolia = () => {
     document.getElementById('algolia-places-listbox-0').style.display = "block";
   }
 };
+
+export { hideAlgolia };
