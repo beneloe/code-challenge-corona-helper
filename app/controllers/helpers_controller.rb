@@ -1,13 +1,8 @@
-require 'uri'
-require 'net/http'
-require 'open-uri'
-require 'nokogiri'
-
 class HelpersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :create]
 
   def index
-    # begin
+    begin
     @first_value = session[:passed_variable]
     @search = @first_value["address"].split(",")[0].capitalize
     @address = @search.gsub(" ", "%20").gsub("ü", "ue").gsub("ä", "ae").gsub("ö", "oe")
@@ -21,11 +16,7 @@ class HelpersController < ApplicationController
     doc_counsellors = Nokogiri::HTML(html_content_counsellors)
     @num_counsellors = doc_counsellors.css('h1.mod.mod-TrefferlisteInfo').first.text.split.first
 
-    @helpers = Helper.where.not(latitude: nil)
-    @experiences = Helper.where.not(latitude: nil)
-    @physicians_array = Helper.where(specialty: "Pediatrician")
-    @counsellors_array = Helper.where(specialty: "Youth Counsellor")
-
+    @markers = session[:passed_variable2]
     # @geojson = Array.new
 
     # @experiences.each do |experience|
@@ -45,24 +36,19 @@ class HelpersController < ApplicationController
     #   }
     # end
 
-    # respond_to do |format|
-    #   format.html
-    #   format.json { render json: @geojson }  # respond with the created JSON object
-    # end
-
     # @markers = @helpers.geocoded.map do |helper|
     #   {
     #     lat: helper.latitude,
     #     lng: helper.longitude
     #   }
     # end
-    # rescue StandardError => e
-    #   puts "error"
-    # end
+    rescue StandardError => e
+      puts "error"
+    end
   end
 
   def create
-    # begin
+    begin
     # Helper.all.destroy_all
     @physicians_array = []
     @counsellors_array = []
@@ -142,20 +128,14 @@ class HelpersController < ApplicationController
           end
         end
         if @physicians_array.length > 0
-          render 'helper'
-          respond_to do |format|
-            format.html
-            format.js
-            format.json
-          end
+          redirect_to '#info-2'
         else
-          render 'helper'
-          respond_to do |format|
-            format.html
-            format.js
-            format.json
-          end
+          redirect_to '#info-2'
         end
+
+        session[:passed_variable2] = @markers
+        session[:passed_variable3] = @physicians_array
+        session[:passed_variable4] = @counsellors_array
         # @helpers = @physicians_array + @counsellors_array
         # @markers = @helpers.map do |helper|
         #   {
@@ -166,8 +146,8 @@ class HelpersController < ApplicationController
       end
     end
 
-    # rescue StandardError => e
-    #   puts "error"
-    # end
+    rescue StandardError => e
+      puts "error"
+    end
   end
 end
