@@ -171,13 +171,6 @@ class HelpersController < ApplicationController
         else
           redirect_to '#info-2'
         end
-        # @helpers = @physicians_array + @counsellors_array
-        # @markers = @helpers.map do |helper|
-        #   {
-        #     lat: helper.latitude,
-        #     lng: helper.longitude
-        #   }
-        # end
       end
     end
 
