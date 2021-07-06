@@ -4,44 +4,84 @@ class HelpersController < ApplicationController
   def index
     begin
     @first_value = session[:passed_variable]
-    @search = @first_value["address"].split(",")[0].capitalize
-    @address = @search.gsub(" ", "%20").gsub("ü", "ue").gsub("ä", "ae").gsub("ö", "oe")
-    @url_physicians = "https://www.gelbeseiten.de/Suche/kinderarzt/#{@address}?umkreis=20000"
-    html_content_physicians = URI.open(@url_physicians).read
-    doc_physicians = Nokogiri::HTML(html_content_physicians)
-    @all_physicians = doc_physicians.css('head').text.include?("Bundesweit")
-    @num_physicians = doc_physicians.css('h1.mod.mod-TrefferlisteInfo').first.text.split.first
-    @url_counsellors = "https://www.gelbeseiten.de/Suche/Jugendaemter/#{@address}?umkreis=20000"
-    html_content_counsellors = URI.open(@url_counsellors).read
-    doc_counsellors = Nokogiri::HTML(html_content_counsellors)
-    @num_counsellors = doc_counsellors.css('h1.mod.mod-TrefferlisteInfo').first.text.split.first
+    @search = @first_value
+    
+    @physicians_array = []
+    @counsellors_array = []
+    @markers = []
+    if @search.present?
+      @address_real = @search["address"].split(",")[0]
+      @address = @search["address"].split(",")[0].gsub(" ", "%20").gsub("ü", "ue").gsub("ä", "ae").gsub("ö", "oe")
+      unless @address.empty?
+        @url_physicians = "https://www.gelbeseiten.de/Suche/kinderarzt/#{@address}?umkreis=20000"
+        html_content_physicians = URI.open(@url_physicians).read
+        doc_physicians = Nokogiri::HTML(html_content_physicians)
+        @all_physicians = doc_physicians.css('head').text.include?("Bundesweit")
+        @num_physicians = doc_physicians.css('h1.mod.mod-TrefferlisteInfo').first.text.split.first
+        physicians = doc_physicians.css('article.mod.mod-Treffer')
+        physicians[0...5].each do |physician|
+          name = physician.css('h2').text
+          physician.css('p.d-inline-block.mod-Treffer--besteBranche').text.include?("Jugendmedizin") ? specialty = "Pediatrician" : nil
+          address = (physician.css('address.mod.mod-AdresseKompakt>p').first.text.tap { |s| s.slice!(physician.css('span.mod-AdresseKompakt__entfernung').text.to_s) }).gsub(/\R+/, ' ').gsub(/[^[:print:]]/, '')
+          number = physician.css('p.mod-AdresseKompakt__phoneNumber').text
+          
+          uri = URI('http://api.positionstack.com/v1/forward')
 
-    @markers = session[:passed_variable2]
-    # @geojson = Array.new
+          params = {
+              'access_key' => '0f3ddc4ca8fa40c5b6edc0e694a649e3',
+              'query' => "#{address}",
+              'country' => 'DE',
+              'limit' => 1
+          }
 
-    # @experiences.each do |experience|
-    #   @geojson << {
-    #     type: 'Feature',
-    #     geometry: {
-    #       type: 'Point',
-    #       coordinates: [experience.longitude, experience.latitude]
-    #     },
-    #     properties: {
-    #       name: experience.name,
-    #       address: experience.address,
-    #       :'marker-color' => '#00607d',
-    #       :'marker-symbol' => 'circle',
-    #       :'marker-size' => 'medium'
-    #     }
-    #   }
-    # end
+          uri.query = URI.encode_www_form(params)
 
-    # @markers = @helpers.geocoded.map do |helper|
-    #   {
-    #     lat: helper.latitude,
-    #     lng: helper.longitude
-    #   }
-    # end
+          response = Net::HTTP.get_response(uri)
+          parsed_response = JSON.parse(response.body)
+          latitude = parsed_response['data'][0]['latitude']
+          longitude = parsed_response['data'][0]['longitude']
+
+          unless specialty.nil?
+            physician_new = Helper.new({name: name, specialty: specialty, address: address, number: number, latitude: latitude, longitude: longitude})
+            @physicians_array << physician_new
+            @markers << { lat: physician_new.latitude, lng: physician_new.longitude }
+          end
+        end
+        @url_counsellors = "https://www.gelbeseiten.de/Suche/Jugendaemter/#{@address}?umkreis=20000"
+        html_content_counsellors = URI.open(@url_counsellors).read
+        doc_counsellors = Nokogiri::HTML(html_content_counsellors)
+        @num_counsellors = doc_counsellors.css('h1.mod.mod-TrefferlisteInfo').first.text.split.first
+        counsellors = doc_counsellors.css('article.mod.mod-Treffer')
+        counsellors[0...5].each do |counsellor|
+          name = counsellor.css('h2').text
+          counsellor.css('p.d-inline-block.mod-Treffer--besteBranche').text.include?("Jugendämter") ? specialty = "Youth Counsellor" : nil
+          address = (counsellor.css('address.mod.mod-AdresseKompakt>p').first.text.tap { |s| s.slice!(counsellor.css('span.mod-AdresseKompakt__entfernung').text.to_s) }).gsub(/\R+/, ' ').gsub(/[^[:print:]]/, '')
+          number = counsellor.css('p.mod-AdresseKompakt__phoneNumber').text
+          
+          uri = URI('http://api.positionstack.com/v1/forward')
+          
+          params = {
+              'access_key' => '0f3ddc4ca8fa40c5b6edc0e694a649e3',
+              'query' => "#{address}",
+              'country' => 'DE',
+              'limit' => 1
+          }
+          
+          uri.query = URI.encode_www_form(params)
+          
+          response = Net::HTTP.get_response(uri)
+          parsed_response = JSON.parse(response.body)
+          latitude = parsed_response['data'][0]['latitude']
+          longitude = parsed_response['data'][0]['longitude']
+          
+          unless specialty.nil?
+            counsellor_new = Helper.new({name: name, specialty: specialty, address: address, number: number, latitude: latitude, longitude: longitude})
+            @counsellors_array << counsellor_new
+            @markers << { lat: counsellor_new.latitude, lng: counsellor_new.longitude }
+          end
+        end
+      end
+    end
     rescue StandardError => e
       puts "error"
     end
@@ -49,7 +89,6 @@ class HelpersController < ApplicationController
 
   def create
     begin
-    # Helper.all.destroy_all
     @physicians_array = []
     @counsellors_array = []
     @markers = []
@@ -132,10 +171,6 @@ class HelpersController < ApplicationController
         else
           redirect_to '#info-2'
         end
-
-        session[:passed_variable2] = @markers
-        session[:passed_variable3] = @physicians_array
-        session[:passed_variable4] = @counsellors_array
         # @helpers = @physicians_array + @counsellors_array
         # @markers = @helpers.map do |helper|
         #   {
