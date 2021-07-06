@@ -118,25 +118,29 @@ class HelpersController < ApplicationController
           counsellor.css('p.d-inline-block.mod-Treffer--besteBranche').text.include?("Jugendämter") ? specialty = "Youth Counsellor" : nil
           address = (counsellor.css('address.mod.mod-AdresseKompakt>p').first.text.tap { |s| s.slice!(counsellor.css('span.mod-AdresseKompakt__entfernung').text.to_s) }).gsub(/\R+/, ' ').gsub(/[^[:print:]]/, '')
           number = counsellor.css('p.mod-AdresseKompakt__phoneNumber').text
+          
           uri = URI('http://api.positionstack.com/v1/forward')
+          
           params = {
               'access_key' => '0f3ddc4ca8fa40c5b6edc0e694a649e3',
               'query' => "#{address}",
               'country' => 'DE',
               'limit' => 1
           }
+          
           uri.query = URI.encode_www_form(params)
+          
           response = Net::HTTP.get_response(uri)
           parsed_response = JSON.parse(response.body)
           latitude = parsed_response['data'][0]['latitude']
           longitude = parsed_response['data'][0]['longitude']
+          
           unless specialty.nil?
             counsellor_new = Helper.new({name: name, specialty: specialty, address: address, number: number, latitude: latitude, longitude: longitude})
             @counsellors_array << counsellor_new
             @markers << { lat: counsellor_new.latitude, lng: counsellor_new.longitude }
           end
         end
-        raise
         if @physicians_array.length > 0
           render 'helper'
           respond_to do |format|
