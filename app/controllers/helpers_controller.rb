@@ -2,10 +2,13 @@ class HelpersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :create]
 
   def index
-    begin
+    # begin
     @first_value = session[:passed_variable]
     @search = @first_value
-    
+    @url_physicians = "https://www.gelbeseiten.de/Suche/kinderarzt/#{@address}?umkreis=20000"
+    html_content_physicians = URI.open(@url_physicians).read
+    doc_physicians = Nokogiri::HTML(html_content_physicians)
+    @all_physicians = doc_physicians.css('head').text.include?("Bundesweit")
     @physicians_array = []
     @counsellors_array = []
     @markers = []
@@ -38,8 +41,13 @@ class HelpersController < ApplicationController
 
           response = Net::HTTP.get_response(uri)
           parsed_response = JSON.parse(response.body)
-          latitude = parsed_response['data'][0]['latitude']
-          longitude = parsed_response['data'][0]['longitude']
+          if !parsed_response['data'][0].empty?
+            latitude = parsed_response['data'][0]['latitude']
+            longitude = parsed_response['data'][0]['longitude']
+          elsif parsed_response['data'][0].empty?
+            latitude = nil
+            longitude = nil
+          end
 
           unless specialty.nil?
             physician_new = Helper.new({name: name, specialty: specialty, address: address, number: number, latitude: latitude, longitude: longitude})
@@ -71,8 +79,13 @@ class HelpersController < ApplicationController
           
           response = Net::HTTP.get_response(uri)
           parsed_response = JSON.parse(response.body)
-          latitude = parsed_response['data'][0]['latitude']
-          longitude = parsed_response['data'][0]['longitude']
+          if !parsed_response['data'][0].empty?
+            latitude = parsed_response['data'][0]['latitude']
+            longitude = parsed_response['data'][0]['longitude']
+          elsif parsed_response['data'][0].empty?
+            latitude = nil
+            longitude = nil
+          end
           
           unless specialty.nil?
             counsellor_new = Helper.new({name: name, specialty: specialty, address: address, number: number, latitude: latitude, longitude: longitude})
@@ -82,13 +95,13 @@ class HelpersController < ApplicationController
         end
       end
     end
-    rescue StandardError => e
-      puts "error"
-    end
+    # rescue StandardError => e
+    #   puts "error"
+    # end
   end
 
   def create
-    begin
+    # begin
     @physicians_array = []
     @counsellors_array = []
     @markers = []
@@ -124,8 +137,13 @@ class HelpersController < ApplicationController
 
           response = Net::HTTP.get_response(uri)
           parsed_response = JSON.parse(response.body)
-          latitude = parsed_response['data'][0]['latitude']
-          longitude = parsed_response['data'][0]['longitude']
+          if !parsed_response['data'][0].empty?
+            latitude = parsed_response['data'][0]['latitude']
+            longitude = parsed_response['data'][0]['longitude']
+          elsif parsed_response['data'][0].empty?
+            latitude = nil
+            longitude = nil
+          end
 
           unless specialty.nil?
             physician_new = Helper.new({name: name, specialty: specialty, address: address, number: number, latitude: latitude, longitude: longitude})
@@ -157,8 +175,13 @@ class HelpersController < ApplicationController
           
           response = Net::HTTP.get_response(uri)
           parsed_response = JSON.parse(response.body)
-          latitude = parsed_response['data'][0]['latitude']
-          longitude = parsed_response['data'][0]['longitude']
+          if !parsed_response['data'][0].empty?
+            latitude = parsed_response['data'][0]['latitude']
+            longitude = parsed_response['data'][0]['longitude']
+          elsif parsed_response['data'][0].empty?
+            latitude = nil
+            longitude = nil
+          end
           
           unless specialty.nil?
             counsellor_new = Helper.new({name: name, specialty: specialty, address: address, number: number, latitude: latitude, longitude: longitude})
@@ -174,8 +197,8 @@ class HelpersController < ApplicationController
       end
     end
 
-    rescue StandardError => e
-      puts "error"
-    end
+    # rescue StandardError => e
+    #   puts "error"
+    # end
   end
 end

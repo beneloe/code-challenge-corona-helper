@@ -82,9 +82,9 @@
                             </div>
                           <% end %>
                         <% end %>
-                        <% unless @num_physicians.to_i < 6 %>
+                        <% unless @num_physicians.to_i == @physicians_array.length %>
                           <div class="mt-3">
-                            <%= link_to "#{@num_physicians.to_i - 5} more physicians near #{@address_real}", "#{@url_physicians}", :target => "_blank" %>
+                            <%= link_to "#{@num_physicians.to_i - @physicians_array.length} more physicians near #{@address_real}", "#{@url_physicians}", :target => "_blank" %>
                           </div>
                         <% end %>
                       </div>
@@ -116,9 +116,9 @@
                             </div>
                           <% end %>
                         <% end %>
-                        <% unless @num_counsellors.to_i < 6 %>
+                        <% unless @num_counsellors.to_i == @counsellors_array.length %>
                           <div class="mt-3">
-                            <%= link_to "#{@num_counsellors.to_i - 5} more counsellors near #{@address_real}", "#{@url_counsellors}", :target => "_blank" %>
+                            <%= link_to "#{@num_counsellors.to_i - @counsellors_array.length} more counsellors near #{@address_real}", "#{@url_counsellors}", :target => "_blank" %>
                           </div>
                         <% end %>
                       </div>
@@ -126,7 +126,7 @@
                   <% end %>
                 <% end %>
               <% end %>
-              <% if @search.present? && @physicians_array.first.nil? && @counsellors_array.nil? || @all_physicians %>
+              <% if @physicians_array.first.nil? && @counsellors_array.nil? || @all_physicians %>
                 <h5 class="mb-3 mt-4">No results found...</h5>
               <% end %>
             </div>
