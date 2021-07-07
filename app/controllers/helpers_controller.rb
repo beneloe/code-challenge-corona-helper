@@ -2,7 +2,7 @@ class HelpersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :create]
 
   def index
-    # begin
+    begin
     @first_value = session[:passed_variable]
     @search = @first_value
     @url_physicians = "https://www.gelbeseiten.de/Suche/kinderarzt/#{@address}?umkreis=20000"
@@ -101,13 +101,13 @@ class HelpersController < ApplicationController
         end
       end
     end
-    # rescue StandardError => e
-    #   puts "error"
-    # end
+    rescue StandardError => e
+      puts "error"
+    end
   end
 
   def create
-    # begin
+    begin
     @physicians_array = []
     @counsellors_array = []
     @search = params[:address]
@@ -156,8 +156,8 @@ class HelpersController < ApplicationController
       end
     end
 
-    # rescue StandardError => e
-    #   puts "error"
-    # end
+    rescue StandardError => e
+      puts "error"
+    end
   end
 end
