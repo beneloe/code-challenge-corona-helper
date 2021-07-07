@@ -41,7 +41,10 @@ class HelpersController < ApplicationController
 
           response = Net::HTTP.get_response(uri)
           parsed_response = JSON.parse(response.body)
-          if !parsed_response['data'][0].empty?
+          if parsed_response['data'].empty?
+            latitude = nil
+            longitude = nil
+          elsif !parsed_response['data'][0].empty?
             latitude = parsed_response['data'][0]['latitude']
             longitude = parsed_response['data'][0]['longitude']
           elsif parsed_response['data'][0].empty?
@@ -52,7 +55,7 @@ class HelpersController < ApplicationController
           unless specialty.nil?
             physician_new = Helper.new({name: name, specialty: specialty, address: address, number: number, latitude: latitude, longitude: longitude})
             @physicians_array << physician_new
-            @markers << { lat: physician_new.latitude, lng: physician_new.longitude }
+            @markers << { lat: physician_new.latitude, lng: physician_new.longitude, info_window: render_to_string(partial: "info_window", locals: { helper: physician_new }) }
           end
         end
         @url_counsellors = "https://www.gelbeseiten.de/Suche/Jugendaemter/#{@address}?umkreis=20000"
@@ -79,7 +82,10 @@ class HelpersController < ApplicationController
           
           response = Net::HTTP.get_response(uri)
           parsed_response = JSON.parse(response.body)
-          if !parsed_response['data'][0].empty?
+          if parsed_response['data'].empty?
+            latitude = nil
+            longitude = nil
+          elsif !parsed_response['data'][0].empty?
             latitude = parsed_response['data'][0]['latitude']
             longitude = parsed_response['data'][0]['longitude']
           elsif parsed_response['data'][0].empty?
@@ -90,7 +96,7 @@ class HelpersController < ApplicationController
           unless specialty.nil?
             counsellor_new = Helper.new({name: name, specialty: specialty, address: address, number: number, latitude: latitude, longitude: longitude})
             @counsellors_array << counsellor_new
-            @markers << { lat: counsellor_new.latitude, lng: counsellor_new.longitude }
+            @markers << { lat: counsellor_new.latitude, lng: counsellor_new.longitude, info_window: render_to_string(partial: "info_window", locals: { helper: counsellor_new }) }
           end
         end
       end
@@ -137,7 +143,10 @@ class HelpersController < ApplicationController
 
           response = Net::HTTP.get_response(uri)
           parsed_response = JSON.parse(response.body)
-          if !parsed_response['data'][0].empty?
+          if parsed_response['data'].empty?
+            latitude = nil
+            longitude = nil
+          elsif !parsed_response['data'][0].empty?
             latitude = parsed_response['data'][0]['latitude']
             longitude = parsed_response['data'][0]['longitude']
           elsif parsed_response['data'][0].empty?
@@ -175,7 +184,10 @@ class HelpersController < ApplicationController
           
           response = Net::HTTP.get_response(uri)
           parsed_response = JSON.parse(response.body)
-          if !parsed_response['data'][0].empty?
+          if parsed_response['data'].empty?
+            latitude = nil
+            longitude = nil
+          elsif !parsed_response['data'][0].empty?
             latitude = parsed_response['data'][0]['latitude']
             longitude = parsed_response['data'][0]['longitude']
           elsif parsed_response['data'][0].empty?
