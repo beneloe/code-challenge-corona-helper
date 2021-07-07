@@ -2,7 +2,7 @@ class HelpersController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :create]
 
   def index
-    begin
+    # begin
     @first_value = session[:passed_variable]
     @search = @first_value
     @url_physicians = "https://www.gelbeseiten.de/Suche/kinderarzt/#{@address}?umkreis=20000"
@@ -25,7 +25,7 @@ class HelpersController < ApplicationController
         physicians[0...5].each do |physician|
           name = physician.css('h2').text
           physician.css('p.d-inline-block.mod-Treffer--besteBranche').text.include?("Jugendmedizin") ? specialty = "Pediatrician" : nil
-          address = (physician.css('address.mod.mod-AdresseKompakt>p').first.text.tap { |s| s.slice!(physician.css('span.mod-AdresseKompakt__entfernung').text.to_s) }).gsub(/\R+/, ' ').gsub(/[^[:print:]]/, '')
+          address = (physician.css('address.mod.mod-AdresseKompakt>p').first.text.tap { |s| s.slice!(physician.css('span.mod-AdresseKompakt__entfernung').text.to_s) }).gsub(/\s*\(.+\)$/, "").gsub(/\R+/, ' ').gsub(/[^[:print:]]/, '')
           number = physician.css('p.mod-AdresseKompakt__phoneNumber').text
           
           uri = URI('http://api.positionstack.com/v1/forward')
@@ -65,8 +65,8 @@ class HelpersController < ApplicationController
         counsellors = doc_counsellors.css('article.mod.mod-Treffer')
         counsellors[0...5].each do |counsellor|
           name = counsellor.css('h2').text
-          counsellor.css('p.d-inline-block.mod-Treffer--besteBranche').text.include?("Jugendämter") ? specialty = "Youth Counsellor" : nil
-          address = (counsellor.css('address.mod.mod-AdresseKompakt>p').first.text.tap { |s| s.slice!(counsellor.css('span.mod-AdresseKompakt__entfernung').text.to_s) }).gsub(/\R+/, ' ').gsub(/[^[:print:]]/, '')
+          counsellor.css('p.d-inline-block.mod-Treffer--besteBranche').text.include?("Jugendämter") ? specialty = "Youth Counsellor" : specialty = "Other Youth Services"
+          address = (counsellor.css('address.mod.mod-AdresseKompakt>p').first.text.tap { |s| s.slice!(counsellor.css('span.mod-AdresseKompakt__entfernung').text.to_s) }).gsub(/\s*\(.+\)$/, "").gsub(/\R+/, ' ').gsub(/[^[:print:]]/, '')
           number = counsellor.css('p.mod-AdresseKompakt__phoneNumber').text
           
           uri = URI('http://api.positionstack.com/v1/forward')
@@ -93,21 +93,19 @@ class HelpersController < ApplicationController
             longitude = nil
           end
           
-          unless specialty.nil?
-            counsellor_new = Helper.new({name: name, specialty: specialty, address: address, number: number, latitude: latitude, longitude: longitude})
-            @counsellors_array << counsellor_new
-            @markers << { lat: counsellor_new.latitude, lng: counsellor_new.longitude, info_window: render_to_string(partial: "info_window", locals: { helper: counsellor_new }) }
-          end
+          counsellor_new = Helper.new({name: name, specialty: specialty, address: address, number: number, latitude: latitude, longitude: longitude})
+          @counsellors_array << counsellor_new
+          @markers << { lat: counsellor_new.latitude, lng: counsellor_new.longitude, info_window: render_to_string(partial: "info_window", locals: { helper: counsellor_new }) }
         end
       end
     end
-    rescue StandardError => e
-      puts "error"
-    end
+    # rescue StandardError => e
+    #   puts "error"
+    # end
   end
 
   def create
-    begin
+    # begin
     @physicians_array = []
     @counsellors_array = []
     @search = params[:address]
@@ -140,13 +138,11 @@ class HelpersController < ApplicationController
         counsellors = doc_counsellors.css('article.mod.mod-Treffer')
         counsellors[0...5].each do |counsellor|
           name = counsellor.css('h2').text
-          counsellor.css('p.d-inline-block.mod-Treffer--besteBranche').text.include?("Jugendämter") ? specialty = "Youth Counsellor" : nil
+          counsellor.css('p.d-inline-block.mod-Treffer--besteBranche').text.include?("Jugendämter") ? specialty = "Youth Counsellor" : specialty = "Other Youth Services"
           address = (counsellor.css('address.mod.mod-AdresseKompakt>p').first.text.tap { |s| s.slice!(counsellor.css('span.mod-AdresseKompakt__entfernung').text.to_s) }).gsub(/\R+/, ' ').gsub(/[^[:print:]]/, '')
           number = counsellor.css('p.mod-AdresseKompakt__phoneNumber').text
-          unless specialty.nil?
-            counsellor_new = Helper.new({name: name, specialty: specialty, address: address, number: number})
-            @counsellors_array << counsellor_new
-          end
+          counsellor_new = Helper.new({name: name, specialty: specialty, address: address, number: number})
+          @counsellors_array << counsellor_new
         end
         if @physicians_array.length > 0
           redirect_to '#info-2'
@@ -156,8 +152,8 @@ class HelpersController < ApplicationController
       end
     end
 
-    rescue StandardError => e
-      puts "error"
-    end
+    # rescue StandardError => e
+    #   puts "error"
+    # end
   end
 end

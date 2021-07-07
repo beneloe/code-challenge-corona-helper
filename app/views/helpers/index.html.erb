@@ -58,7 +58,7 @@
           </div>
           <% if @search.present? %>
             <div id="results">
-              <% if @search.present? && @physicians_array.first.nil? && @counsellors_array != nil && !@all_physicians %>
+              <% if @search.present? && @physicians_array.first.nil? && !@counsellors_array.empty? && !@all_physicians %>
                 <h5 class="mb-3 mt-4">No results for physicians...</h5>
               <% end %>
               <% unless @all_physicians %>
@@ -92,11 +92,11 @@
                   <% end %>
                 <% end %>
               <% end %>
-              <% if @search.present? && @counsellors_array == nil && @physicians_array.first != nil && !@all_physicians %>
+              <% if @search.present? && @counsellors_array.empty? && @physicians_array.first != nil && !@all_physicians %>
                 <h5 class="mb-3 mt-4">No results for counsellors...</h5>
               <% end %>
               <% unless @all_physicians %>
-                <% unless @counsellors_array.nil? %>
+                <% unless @counsellors_array.empty? %>
                   <% if @search.present? %>
                     <div>
                       <h5 class="mb-3 mt-4">Counsellors near <%= @address_real %></h5>
@@ -126,7 +126,7 @@
                   <% end %>
                 <% end %>
               <% end %>
-              <% if @physicians_array.first.nil? && @counsellors_array.nil? || @all_physicians %>
+              <% if @physicians_array.first.nil? && @counsellors_array.empty? || @all_physicians %>
                 <h5 class="mb-3 mt-4">No results found...</h5>
               <% end %>
             </div>
