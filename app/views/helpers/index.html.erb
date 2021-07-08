@@ -31,9 +31,9 @@
           <p>The COVID-19 vaccine Cominarty from BioNTech/Pfizer has been authorized for youths aged 12 and older 
           <a href="https://www.ema.europa.eu/en/medicines/human/EPAR/comirnaty" target="_blank"><i class="fas fa-external-link-alt mr-1"></i>by the European Medicines Agency(EMA)</a>. Cominarty has received a recommendation for youths aged 12 and older <a href="https://www.rki.de/DE/Content/Infekt/Impfen/ImpfungenAZ/COVID-19/Infoblatt_Impfung_Kinder_und_Jugendliche.html" target="_blank"><i class="fas fa-external-link-alt mr-1"></i>from the German Standing Committee on Vaccination (STIKO)</a>.</p>
           <h5 class="mb-3 mt-4">You have the right to medical care as an adolescent</h5>
-          <p>As a minor it is advised to consult with your parents or legal guardian before a medical procedure. However, should your parents forbid you to receive a medically necessary procedure, you can receive the procedure without their consent, as provided <a href="https://www.gesetze-im-internet.de/bgb/BJNR001950896.html#BJNR001950896BJNG026900377" target="_blank"><i class="fas fa-external-link-alt mr-1"></i>in the German Patient Rights Law</a>. Don't worry, physicians and youth counsellors are here to guide you along the path.</p>
+          <p>As a minor it is advised to consult with your parents or legal guardian before a medical procedure. However, should your parents forbid you to receive a medically necessary procedure, you can receive the procedure (such as the COVID-19 vaccination) without their consent, as provided <a href="https://www.gesetze-im-internet.de/bgb/BJNR001950896.html#BJNR001950896BJNG026900377" target="_blank"><i class="fas fa-external-link-alt mr-1"></i>in the German Patient Rights Law</a>. Don't worry, physicians and youth counsellors are here to guide you along the path.</p>
           <h5 class="mb-3 mt-4">Physicians & youth counsellors are here to help</h5>
-          <p>With your consent physicians are allowed to perform medical procedures. The physician will judge the necessity of the procedure and your ability to give consent independently of your parents. If these requirements are fulfilled, the procedure can be performed. If you feel insecure about proceeding without guidance, your local youth counsellors are here to help.</p>
+          <p>With your consent physicians are allowed to perform medical procedures. The physician will judge the necessity of the procedure, and your ability to reason and give consent independently of your parents. If these requirements are fulfilled, the procedure can be performed. If you feel insecure about proceeding without guidance, your local youth counsellors are here to help.</p>
         </div>
       </div>
     </div>
@@ -44,7 +44,7 @@
       <div class="d-flex">
         <div class="m-3 mt-4 info-section">
           <h3 class="mb-4">2. Search Physicians & Counsellors</h3>
-          <p class="mb-4">We know it can feel frightening, but don't forget that you're not alone in this! You can look for local pediatricians and youth counsellors here. You can set up an appointment directly with a physician or call and meet a youth counsellor for guidance.</p>
+          <p class="mb-4">We know it can feel frightening, but don't forget that you're not alone in this! You can search for local pediatricians and youth counsellors here. You can set up an appointment directly with a physician or call and meet a youth counsellor for guidance.</p>
           <%= simple_form_for :address, url: helpers_path, action: "create", html: { class: 'form-inline', autocomplete: "off" } do |f| %>
             <%= f.input :address,
               input_html: {value: "", class: "address-input"},
@@ -150,9 +150,9 @@
         <%= image_tag("doctor.png", class: "col-md-3 mt-4 mr-1 info-img-small") %>
         <div class="m-3 mt-4 info-section">
           <h3 class="mb-4" id="info-3">3. Reach out to Helpers</h3>
-          <h5 class="mb-3 mt-4">Contact a youth counseller near you & set up a meeting</h5>
-          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
-          <h5 class="mb-3 mt-4">Take a list of local physicians to the meeting with the youth counsellor</h5>
+          <h5 class="mb-3 mt-4">Your doctor's appointment</h5>
+          <p>Medical procedures are invasive and delicate. Physicians are not obligated to perform COVID-19 vaccinations for everyone. That's why it's important for you to know the risks and benefits of the vaccination. You will have to make a compelling case why you should receive a vaccination without parental consent. Only if you are knowledgeable about the issue and a medical necessity is present, will a physician be convinced. We have provided you with information on COVID-19 in the <a href="#info-4">Further Information</a> section. You will have to make your own research, however, only then will you form an independent opinion.</p>
+          <h5 class="mb-3 mt-4">Meet with a local youth counsellor</h5>
           <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
           <h5 class="mb-3 mt-4">What now?</h5>
           <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
@@ -161,16 +161,16 @@
     </div>
   </div>
 
-  <div class="row mt-4">
+  <div class="row mt-4" id="info-4">
     <div>
       <div class="d-flex">
         <div class="m-3 mt-4 info-section">
           <h3 class="mb-4">Further Information</h3>
+          <h5 class="mb-3 mt-4">Information on COVID-19</h5>
+          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+          <h5 class="mb-3 mt-4">Best practices for youths during COVID-19</h5>
+          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
           <h5 class="mb-3 mt-4">Online youth counselling</h5>
-          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
-          <h5 class="mb-3 mt-4">How to cope with social isolation during COVID-19</h5>
-          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
-          <h5 class="mb-3 mt-4">Best practices during COVID-19 for youths</h5>
           <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
         </div>
         <%= image_tag("info.png", class: "col-md-3 mt-4 ml-3 info-img") %>
