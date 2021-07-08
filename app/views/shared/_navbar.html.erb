@@ -1,6 +1,6 @@
 <% # Unless logged in as admin, the navbar does not contain log in / sign up links, as there is only the admin role for user %>
 
-<div class="navbar navbar-expand-md navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-lg navbar-light navbar-lewagon">
   <%= link_to "/", class: "navbar-brand" do %>
     <%= image_tag "corona-helper-logo.png" %>
     <% end %>
@@ -30,7 +30,13 @@
           <%= link_to "Search Helpers", "#info-2", class: "nav-link" %>
         </li>
         <li class="nav-item link-font">
-          <%= link_to "Contacting Helpers", "#info-3", class: "nav-link" %>
+          <%= link_to "Contact Helpers", "#info-3", class: "nav-link" %>
+        </li>
+        <li class="nav-item link-font">
+          <%= link_to "Further Information", "#info-4", class: "nav-link" %>
+        </li>
+        <li class="nav-item link-font">
+          <%= link_to "Contact", "#info-5", class: "nav-link" %>
         </li>
       <% end %>
     </ul>

@@ -9,7 +9,7 @@
       </div>
       <div class="d-flex align-items-center">
         <a href="#info-2"><%= image_tag("bullet-2.png", class: "banner-bullet") %></a>
-        <a href="#info-2"><p>Using our search function to find local physicians and physicians</p></a>
+        <a href="#info-2"><p>Using our search function to find local physicians and youth counsellors</p></a>
       </div>
       <div class="d-flex align-items-center">
         <a href="#info-3"><%= image_tag("bullet-3.png", class: "banner-bullet") %></a>
@@ -28,11 +28,12 @@
         <div class="m-3 mt-4 info-section">
           <h3 class="mb-4">1. COVID-19 and You</h3>
           <h5 class="mb-3 mt-4">COVID-19 vaccines are available for 12 - 17 year-olds</h5>
-          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+          <p>The COVID-19 vaccine Cominarty from BioNTech/Pfizer has been authorized for youths aged 12 and older 
+          <a href="https://www.ema.europa.eu/en/medicines/human/EPAR/comirnaty" target="_blank"><i class="fas fa-external-link-alt mr-1"></i>by the European Medicines Agency(EMA)</a>. Cominarty has received a recommendation for youths aged 12 and older <a href="https://www.rki.de/DE/Content/Infekt/Impfen/ImpfungenAZ/COVID-19/Infoblatt_Impfung_Kinder_und_Jugendliche.html" target="_blank"><i class="fas fa-external-link-alt mr-1"></i>from the German Standing Committee on Vaccination (STIKO)</a>.</p>
           <h5 class="mb-3 mt-4">You have the right to medical care as an adolescent</h5>
-          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+          <p>As a minor it is advised to consult with your parents or legal guardian before a medical procedure. However, should your parents forbid you to receive a medically necessary procedure, you can receive the procedure (such as the COVID-19 vaccination) without their consent, as provided <a href="https://www.gesetze-im-internet.de/bgb/BJNR001950896.html#BJNR001950896BJNG026900377" target="_blank"><i class="fas fa-external-link-alt mr-1"></i>in the German Patient Rights Law</a>. Don't worry, physicians and youth counsellors are here to guide you along the path.</p>
           <h5 class="mb-3 mt-4">Physicians & youth counsellors are here to help</h5>
-          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+          <p>With your consent physicians are allowed to perform medical procedures. The physician will judge the necessity of the procedure, and your ability to reason and give consent independently of your parents. If these requirements are fulfilled, the procedure can be performed. If you feel insecure about proceeding without guidance, your local youth counsellors are here to help.</p>
         </div>
       </div>
     </div>
@@ -43,7 +44,7 @@
       <div class="d-flex">
         <div class="m-3 mt-4 info-section">
           <h3 class="mb-4">2. Search Physicians & Counsellors</h3>
-          <p class="mb-4">I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of.</p>
+          <p class="mb-4">We know it can feel frightening, but don't forget that you're not alone in this! You can search for local pediatricians and youth counsellors here. You can set up an appointment directly with a physician or call and meet a youth counsellor for guidance.</p>
           <%= simple_form_for :address, url: helpers_path, action: "create", html: { class: 'form-inline', autocomplete: "off" } do |f| %>
             <%= f.input :address,
               input_html: {value: "", class: "address-input"},
@@ -73,7 +74,7 @@
                               <div class="card-helpers-name d-flex mt-1">  
                                 <p class="card-helpers-name-p mb-0"><%= physician.name %></p>
                                 <div class="d-flex align-items-center mb-0">
-                                  <%= image_tag("phone.png", class:"card-helpers-icon mr-1 mb-0") %>
+                                  <%= image_tag("phone.png", class:"card-helpers-icon mr-2 mb-0") %>
                                   <p class="card-helpers-num-p mb-0"><%= physician.number %></p>
                                 </div>
                               </div>
@@ -84,7 +85,10 @@
                         <% end %>
                         <% unless @num_physicians.to_i == @physicians_array.length %>
                           <div class="mt-3">
-                            <%= link_to "#{@num_physicians.to_i - @physicians_array.length} more physicians near #{@address_real}", "#{@url_physicians}", :target => "_blank" %>
+                            <%= link_to @url_physicians, :target => "_blank" do %>
+                              <i class="fas fa-external-link-alt mr-1"></i>
+                              <%= "#{@num_physicians.to_i - @physicians_array.length} more physicians near #{@address_real}" %>
+                            <% end %>
                           </div>
                         <% end %>
                       </div>
@@ -107,7 +111,7 @@
                               <div class="card-helpers-name d-flex mt-1">  
                                 <p class="card-helpers-name-p mb-0"><%= counsellor.name %></p>
                                 <div class="d-flex align-items-center mb-0">
-                                  <%= image_tag("phone.png", class:"card-helpers-icon mr-1 mb-0") %>
+                                  <%= image_tag("phone.png", class:"card-helpers-icon mr-2 mb-0") %>
                                   <p class="card-helpers-num-p mb-0"><%= counsellor.number %></p>
                                 </div>
                               </div>
@@ -118,7 +122,10 @@
                         <% end %>
                         <% unless @num_counsellors.to_i == @counsellors_array.length %>
                           <div class="mt-3">
-                            <%= link_to "#{@num_counsellors.to_i - @counsellors_array.length} more counsellors near #{@address_real}", "#{@url_counsellors}", :target => "_blank" %>
+                            <%= link_to @url_counsellors, :target => "_blank" do %>
+                              <i class="fas fa-external-link-alt mr-1"></i>
+                              <%= "#{@num_counsellors.to_i - @counsellors_array.length} more counsellors near #{@address_real}" %>
+                            <% end %>
                           </div>
                         <% end %>
                       </div>
@@ -143,31 +150,45 @@
         <%= image_tag("doctor.png", class: "col-md-3 mt-4 mr-1 info-img-small") %>
         <div class="m-3 mt-4 info-section">
           <h3 class="mb-4" id="info-3">3. Reach out to Helpers</h3>
-          <h5 class="mb-3 mt-4">Contact a youth counseller near you & set up a meeting</h5>
-          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
-          <h5 class="mb-3 mt-4">Take a list of local physicians to the meeting with the youth counsellor</h5>
-          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+          <h5 class="mb-3 mt-4">Your doctor's appointment</h5>
+          <p>Medical procedures are invasive and delicate. Physicians are not obligated to carry out COVID-19 vaccinations for everyone. You will have to make a compelling case why you should receive a vaccination without parental consent. Only if you are knowledgeable about the issue and a medical necessity is present, will a physician be convinced. That's why it's important for you to know the risks and the benefits of the vaccination. We have provided you with information on COVID-19 in the <a href="#info-4">Further Information</a> section. You will have to make your own research, however, only then will you form an independent opinion.</p>
+          <h5 class="mb-3 mt-4">Meet with a local youth counsellor</h5>
+          <p>If you feel like you want to talk with someone about your situation before making a doctor's appointment, don't hesitate to contact local youth counselling. You can talk openly about your issues with them, and they will provide you with help and guidance during these difficult times. The decision to receive a vaccination, and the research you need to do to form an informed opinion, have to come from you however. In case you and your youth counsellor think your parents may yet be convinced to support your decision, the youth counsellor will help you by mediating between you and your parents.</p>
           <h5 class="mb-3 mt-4">What now?</h5>
-          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+          <p>If you feel like you are ready to receive the COVID-19 vaccination, you can call local physicians and ask whether they carry out vaccinations with Cominarty. Not every physician will have the vaccination, so don't be discouraged if you have to call several numbers. During the appointment, you have to describe your situation honestly, and make a case for why you want to receive the vaccine. In case you have any questions, you can always <a href="#info-5">contact us</a>!</p>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="row mt-4">
+  <div class="row mt-4" id="info-4">
     <div>
       <div class="d-flex">
         <div class="m-3 mt-4 info-section">
           <h3 class="mb-4">Further Information</h3>
+          <h5 class="mb-3 mt-4">Information on COVID-19 and vaccinations</h5>
+          <p>The German Federal Ministry of Health publishes extensive <a href="https://www.zusammengegencorona.de/en/?articlefilter=all" target="_blank"><i class="fas fa-external-link-alt mr-1"></i>information on COVID-19</a>, including on the virus, vaccinations, travel and other topics. The Robert Koch Institute provides detailed <a href="https://www.rki.de/EN/Content/infections/epidemiology/outbreaks/COVID-19/COVID19.html" target="_blank"><i class="fas fa-external-link-alt mr-1"></i>scientific information on COVID-19</a>. The Paul-Ehrlich-Institute, responsible for the authorisation of medicinal products in Germany, provides detailed <a href="https://www.pei.de/EN/newsroom/dossier/coronavirus/coronavirus-content.html;jsessionid=B8009DCBAB3ACE1AE3BE33FBFB335EE4.intranet241?nn=164146" target="_blank"><i class="fas fa-external-link-alt mr-1"></i>information on COVID-19 vaccines</a>.</p>
+          <h5 class="mb-3 mt-4">Support for youths during COVID-19</h5>
+          <p>You can find help and support for other issues you might be facing during COVID-19 at <a href="https://www.corona-und-du.info/" target="_blank"><i class="fas fa-external-link-alt mr-1"></i>Corona und Du</a>, an interactive website created by the Youth Psychiatry of the Ludwig-Maximilians-University Hospital (LMU) and the Beisheim Foundation. The German Association for Psychology e.V. has created an <a href="https://psychologische-coronahilfe.de/hilfen-fuer-kinder-und-jugendliche/" target="_blank"><i class="fas fa-external-link-alt mr-1"></i>info page</a> with answers to challenges youths are facing during COVID-19, as well.</p>
           <h5 class="mb-3 mt-4">Online youth counselling</h5>
-          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
-          <h5 class="mb-3 mt-4">How to cope with social isolation during COVID-19</h5>
-          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
-          <h5 class="mb-3 mt-4">Best practices during COVID-19 for youths</h5>
-          <p>I'm baby trust fund before they sold out lo-fi, whatever thundercats godard quinoa food truck live-edge etsy tofu umami leggings vinyl. IPhone gochujang kitsch neutra retro. You probably haven't heard of them direct trade migas glossier skateboard tote bag chambray. Kale chips tbh bicycle rights, celiac pabst master cleanse viral chillwave.</p>
+          <p>You can find anonymous, safe and free online youth <a href="https://jugend.bke-beratung.de/views/home/index.html" target="_blank"><i class="fas fa-external-link-alt mr-1"></i>counselling on all topics</a>, provided by the German Federal Conference on Educational Guidance e.V. Counselling is offered on email and chat. The Group for Child, Youth and Social Help offers <a href="https://www.jugendnotmail.de/" target="_blank"><i class="fas fa-external-link-alt mr-1"></i>general youth counselling</a> via email and chat, as well.</p>
         </div>
         <%= image_tag("info.png", class: "col-md-3 mt-4 ml-3 info-img") %>
       </div>
     </div>
-  </div>  
+  </div>
+
+  <div class="row mt-4" id="info-3">
+    <div>
+      <div class="d-flex">
+        <%= image_tag("email.png", class: "col-md-3 mt-4 mr-1 info-img-small") %>
+        <div class="m-3 mt-4 info-section">
+          <h3 class="mb-4" id="info-5">Contact Us</h3>
+          <h5 class="mb-3 mt-4">We're always here to help!</h5>
+          <p>Do you have lingering questions or concerns? Don't hesitate to contact us at: <a href = "mailto: not@real.email">not@real.email</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
