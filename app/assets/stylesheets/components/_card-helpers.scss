@@ -17,13 +17,13 @@
   .card-helpers-name {
     width: 100%;
     justify-content: space-between;
-    @media (max-width: 768px) {
+    @media (max-width: 991px) {
       flex-wrap: wrap;
       justify-content: flex-start;
     }
 
     .card-helpers-name-p {
-      @media (max-width: 768px) {
+      @media (max-width: 991px) {
         width: 100%;
       }
     }
@@ -31,7 +31,7 @@
 
   .card-helpers-icon {
     max-height: 30px;
-    @media (max-width: 768px) {
+    @media (max-width: 991px) {
       max-height: 20px;
     }
   }
