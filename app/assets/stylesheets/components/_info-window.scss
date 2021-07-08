@@ -1,0 +1,6 @@
+button.mapboxgl-popup-close-button {
+  outline: none;
+  .focus, &:focus {
+    outline: none;
+  }
+}
