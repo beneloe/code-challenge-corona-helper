@@ -84,7 +84,10 @@
                         <% end %>
                         <% unless @num_physicians.to_i == @physicians_array.length %>
                           <div class="mt-3">
-                            <%= link_to "#{@num_physicians.to_i - @physicians_array.length} more physicians near #{@address_real}", "#{@url_physicians}", :target => "_blank" %>
+                            <%= link_to @url_physicians, :target => "_blank" do %>
+                              <i class="fas fa-external-link-alt mr-1"></i>
+                              <%= "#{@num_physicians.to_i - @physicians_array.length} more physicians near #{@address_real}" %>
+                            <% end %>
                           </div>
                         <% end %>
                       </div>
@@ -118,7 +121,10 @@
                         <% end %>
                         <% unless @num_counsellors.to_i == @counsellors_array.length %>
                           <div class="mt-3">
-                            <%= link_to "#{@num_counsellors.to_i - @counsellors_array.length} more counsellors near #{@address_real}", "#{@url_counsellors}", :target => "_blank" %>
+                            <%= link_to @url_counsellors, :target => "_blank" do %>
+                              <i class="fas fa-external-link-alt mr-1"></i>
+                              <%= "#{@num_counsellors.to_i - @counsellors_array.length} more counsellors near #{@address_real}" %>
+                            <% end %>
                           </div>
                         <% end %>
                       </div>
