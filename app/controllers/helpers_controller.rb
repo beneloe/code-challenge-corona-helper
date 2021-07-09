@@ -86,8 +86,22 @@ class HelpersController < ApplicationController
             latitude = nil
             longitude = nil
           elsif !parsed_response['data'][0].empty?
-            latitude = parsed_response['data'][0]['latitude']
-            longitude = parsed_response['data'][0]['longitude']
+            if (parsed_response['data'][0]['latitude'] < 47.2701121)
+              latitude = nil
+              longitude = nil
+            elsif (parsed_response['data'][0]['latitude'] > 55.0583559)
+              latitude = nil
+              longitude = nil
+            elsif (parsed_response['data'][0]['longitude'] < 5.8663442)
+              latitude = nil
+              longitude = nil
+            elsif (parsed_response['data'][0]['longitude'] > 15.041895)
+              latitude = nil
+              longitude = nil
+            else
+              latitude = parsed_response['data'][0]['latitude']
+              longitude = parsed_response['data'][0]['longitude']
+            end
           elsif parsed_response['data'][0].empty?
             latitude = nil
             longitude = nil
